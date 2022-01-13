@@ -37,6 +37,12 @@ const Layout = ({ children }) => {
           </Typography>
         </div>
       </Drawer>
+      <Drawer
+        variant="permanent"
+        className={classes.drawer}
+        classes={{ paper: classes.drawerPaper }}
+        anchor="right"
+      ></Drawer>
     </div>
   );
 };
