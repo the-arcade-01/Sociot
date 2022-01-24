@@ -1,37 +1,33 @@
 import React from "react";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { createTheme, ThemeProvider } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 
 import Layout from "./components/Layout";
-import CreatePage from "./pages/CreatePage";
 import HomePage from "./pages/HomePage";
+import CreatePost from "./pages/CreatePost";
 
 const theme = createTheme({
-  shadows: Array(25).fill("none"),
   typography: {
     fontFamily: "Nunito",
   },
-  palette: {
-    background: {
-      default: "hsl(220, 16%, 96%)",
-    },
-  },
+  shadows: Array(25).fill("none"),
 });
 
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Router>
-        <Layout>
+      <Layout>
+        <Router>
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/create" element={<CreatePage />} />
+            <Route exact path="/" element={<HomePage />} />
+            <Route path="/create" element={<CreatePost />} />
           </Routes>
-        </Layout>
-      </Router>
+        </Router>
+      </Layout>
     </ThemeProvider>
   );
 };
