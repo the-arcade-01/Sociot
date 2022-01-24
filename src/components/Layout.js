@@ -6,16 +6,12 @@ import Avatar from "@mui/material/Avatar";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 
-import { FiEdit } from "react-icons/fi";
-import { BiCommentDetail } from "react-icons/bi";
-import { BsJournalBookmark } from "react-icons/bs";
-import { HiOutlinePhotograph } from "react-icons/hi";
-
 const Layout = ({ children }) => {
   const pages = [
-    { icon: <HiOutlinePhotograph />, page: "Posts" },
-    { icon: <BiCommentDetail />, page: "Activity" },
-    { icon: <BsJournalBookmark />, page: "Saved Posts" },
+    { icon: <i class="fi fi-rr-home" />, page: "Home" },
+    { icon: <i class="fi fi-rr-picture" />, page: "Your Posts" },
+    { icon: <i class="fi fi-rr-comment" />, page: "Your Activity" },
+    { icon: <i class="fi fi-rr-bookmark" />, page: "Saved Posts" },
   ];
   return (
     <div style={{ padding: "30px 140px" }}>
@@ -36,7 +32,6 @@ const Layout = ({ children }) => {
             sx={{ width: 56, height: 56 }}
           />
           <Typography variant="h2">Hello</Typography>
-          <FiEdit />
         </Paper>
         <Paper
           sx={{

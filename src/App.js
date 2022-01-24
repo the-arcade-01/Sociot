@@ -11,7 +11,7 @@ import CreatePost from "./pages/CreatePost";
 
 const theme = createTheme({
   typography: {
-    fontFamily: "Nunito",
+    fontFamily: "Dongle",
   },
   shadows: Array(25).fill("none"),
   palette: {
