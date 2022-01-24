@@ -14,6 +14,11 @@ const theme = createTheme({
     fontFamily: "Nunito",
   },
   shadows: Array(25).fill("none"),
+  palette: {
+    background: {
+      default: "#f7f7f7;",
+    },
+  },
 });
 
 const App = () => {
