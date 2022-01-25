@@ -5,6 +5,9 @@ import Paper from "@mui/material/Paper";
 import Avatar from "@mui/material/Avatar";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
+import TextField from "@mui/material/TextField";
+import InputAdornment from "@mui/material/InputAdornment";
+import Button from "@mui/material/Button";
 
 import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
@@ -51,9 +54,22 @@ const Layout = ({ children }) => {
     },
   ];
   const [sortBy, setSortBy] = useState("latest");
+  const [search, setSearch] = useState("");
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    console.log(search, sortBy);
+    setSearch("");
+  };
 
   return (
-    <div style={{ padding: "30px 140px", display: "flex", gap: "50px" }}>
+    <div
+      style={{
+        margin: "35px 140px",
+        display: "flex",
+        gap: "70px",
+      }}
+    >
       <section>
         <Paper
           sx={{
@@ -70,18 +86,18 @@ const Layout = ({ children }) => {
         >
           <Avatar
             alt="avatar"
-            src="images/UA6.png"
+            src="images/taichi.png"
             sx={{ width: 45, height: 45, cursor: "pointer" }}
           />
           <div>
             <Typography variant="h5" sx={{ fontWeight: "600" }}>
-              Alexandar
+              Aashish
             </Typography>
             <Typography
               variant="body2"
               sx={{ fontWeight: "500", cursor: "pointer", color: "#acdbdf" }}
             >
-              @alexandarborke
+              @the-arcade-01
             </Typography>
           </div>
         </Paper>
@@ -118,7 +134,14 @@ const Layout = ({ children }) => {
           </List>
         </Paper>
       </section>
-      <section>
+      <section
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "flex-start",
+          gap: "40px",
+        }}
+      >
         <div
           style={{
             display: "flex",
@@ -135,6 +158,59 @@ const Layout = ({ children }) => {
           </Typography>
           <SortSelect sortBy={sortBy} setSortBy={setSortBy} />
         </div>
+        <form autoComplete="off" onSubmit={onSubmit}>
+          <FormControl>
+            <TextField
+              placeholder="Search"
+              sx={{
+                background: "#d8e3e7",
+                color: "#132c33",
+                fontWeight: "500",
+                height: "55px",
+                width: "400px",
+                borderRadius: "10px",
+                "& .MuiOutlinedInput-notchedOutline": {
+                  border: "none",
+                },
+                "&:hover .MuiOutlinedInput-notchedOutline": {
+                  border: "none",
+                },
+                "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
+                  border: "none",
+                },
+                "& .Mui-disabled .MuiOutlinedInput-notchedOutline": {
+                  border: "none",
+                },
+              }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <i
+                      className="fi fi-rr-search"
+                      style={{ fontSize: "20px", paddingRight: "5px" }}
+                    />
+                  </InputAdornment>
+                ),
+              }}
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </FormControl>
+        </form>
+        <Button
+          sx={{
+            background: "#126e82",
+            color: "#d8e3e7",
+            width: "150px",
+            height: "50px",
+            borderRadius: "10px",
+            "&:hover": {
+              background: "#132c33",
+            },
+          }}
+        >
+          Create Post
+        </Button>
       </section>
     </div>
   );
