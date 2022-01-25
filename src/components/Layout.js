@@ -66,12 +66,17 @@ const Layout = ({ children }) => {
             src="images/UA6.png"
             sx={{ width: 45, height: 45, cursor: "pointer" }}
           />
-          <Typography
-            variant="h5"
-            sx={{ fontWeight: "600", cursor: "pointer" }}
-          >
-            Alexandar
-          </Typography>
+          <div>
+            <Typography variant="h5" sx={{ fontWeight: "600" }}>
+              Alexandar
+            </Typography>
+            <Typography
+              variant="body2"
+              sx={{ fontWeight: "500", cursor: "pointer", color: "#acdbdf" }}
+            >
+              @alexandarborke
+            </Typography>
+          </div>
         </Paper>
         <Paper
           sx={{
