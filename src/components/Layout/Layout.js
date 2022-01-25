@@ -7,19 +7,11 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
+import FormControl from "@mui/material/FormControl";
 import Button from "@mui/material/Button";
 
-// Sort by imports
-
-import Box from "@mui/material/Box";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-
-// Category imports
-
-import ToggleButton from "@mui/material/ToggleButton";
-import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import SortSelect from "./SortSelect";
+import CategoriesToggleButton from "./CategoriesToggleButton";
 
 const Layout = ({ children }) => {
   const pages = [
@@ -58,6 +50,15 @@ const Layout = ({ children }) => {
         />
       ),
       page: "Saved Posts",
+    },
+    {
+      icon: (
+        <i
+          className="fi fi-rr-sign-out-alt"
+          style={{ fontSize: "20px", marginTop: "5px" }}
+        />
+      ),
+      page: "Logout",
     },
   ];
   const [sortBy, setSortBy] = useState("latest");
@@ -112,7 +113,7 @@ const Layout = ({ children }) => {
         <Paper
           sx={{
             width: "220px",
-            height: "250px",
+            height: "300px",
             color: "#d8e3e7",
             background: "#126e82",
             padding: "10px 10px",
@@ -249,79 +250,6 @@ const Layout = ({ children }) => {
         </div>
       </section>
     </div>
-  );
-};
-
-const SortSelect = ({ sortBy, setSortBy }) => {
-  return (
-    <Box sx={{ background: "#126e82", borderRadius: "5px" }}>
-      <FormControl>
-        <Select
-          value={sortBy}
-          onChange={(e) => setSortBy(e.target.value)}
-          sx={{
-            border: "none",
-            width: "100px",
-            height: "50px",
-            borderRadius: "5px",
-            color: "#d8e3e7",
-            fontWeight: "500",
-            "& .MuiOutlinedInput-notchedOutline": {
-              border: "none",
-            },
-            "&:hover .MuiOutlinedInput-notchedOutline": {
-              border: "none",
-            },
-            "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
-              border: "none",
-            },
-            "& .Mui-disabled .MuiOutlinedInput-notchedOutline": {
-              border: "none",
-            },
-          }}
-        >
-          <MenuItem value={"latest"}>Latest</MenuItem>
-          <MenuItem value={"votes"}>Votes</MenuItem>
-        </Select>
-      </FormControl>
-    </Box>
-  );
-};
-
-const CategoriesToggleButton = ({ category, setCategory }) => {
-  const categories = [
-    "all",
-    "music",
-    "funny",
-    "videos",
-    "programming",
-    "news",
-    "fashion",
-  ];
-
-  return (
-    <ToggleButtonGroup
-      value={category}
-      exclusive
-      onChange={(e, newCategory) => setCategory(newCategory)}
-      sx={{
-        background: "#126e82",
-      }}
-    >
-      {categories.map((cate, index) => {
-        return (
-          <ToggleButton
-            value={cate}
-            key={index}
-            sx={{
-              color: "#d8e3e7",
-            }}
-          >
-            {cate}
-          </ToggleButton>
-        );
-      })}
-    </ToggleButtonGroup>
   );
 };
 

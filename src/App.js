@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 
-import Layout from "./components/Layout";
+import Layout from "./components/Layout/Layout";
 import HomePage from "./pages/HomePage";
 import CreatePost from "./pages/CreatePost";
 
