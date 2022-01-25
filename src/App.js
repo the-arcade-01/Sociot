@@ -11,12 +11,12 @@ import CreatePost from "./pages/CreatePost";
 
 const theme = createTheme({
   typography: {
-    fontFamily: "Dongle",
+    fontFamily: "Ubuntu",
   },
   shadows: Array(25).fill("none"),
   palette: {
     background: {
-      default: "#f7f7f7;",
+      default: "#172126",
     },
   },
 });
