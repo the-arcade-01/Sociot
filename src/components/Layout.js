@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import Avatar from "@mui/material/Avatar";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
+
+import Box from "@mui/material/Box";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 const Layout = ({ children }) => {
   const pages = [
@@ -45,8 +50,10 @@ const Layout = ({ children }) => {
       page: "Saved Posts",
     },
   ];
+  const [sortBy, setSortBy] = useState("latest");
+
   return (
-    <div style={{ padding: "30px 140px" }}>
+    <div style={{ padding: "30px 140px", display: "flex", gap: "50px" }}>
       <section>
         <Paper
           sx={{
@@ -111,7 +118,61 @@ const Layout = ({ children }) => {
           </List>
         </Paper>
       </section>
+      <section>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "15px",
+          }}
+        >
+          <Typography
+            variant="subtitle"
+            sx={{ fontWeight: "500", color: "#d8e3e7" }}
+          >
+            Sort By
+          </Typography>
+          <SortSelect sortBy={sortBy} setSortBy={setSortBy} />
+        </div>
+      </section>
     </div>
+  );
+};
+
+const SortSelect = ({ sortBy, setSortBy }) => {
+  return (
+    <Box sx={{ background: "#126e82", borderRadius: "5px" }}>
+      <FormControl>
+        <Select
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value)}
+          sx={{
+            border: "none",
+            width: "100px",
+            height: "50px",
+            borderRadius: "5px",
+            color: "#d8e3e7",
+            fontWeight: "500",
+            "& .MuiOutlinedInput-notchedOutline": {
+              border: "none",
+            },
+            "&:hover .MuiOutlinedInput-notchedOutline": {
+              border: "none",
+            },
+            "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
+              border: "none",
+            },
+            "& .Mui-disabled .MuiOutlinedInput-notchedOutline": {
+              border: "none",
+            },
+          }}
+        >
+          <MenuItem value={"latest"}>Latest</MenuItem>
+          <MenuItem value={"votes"}>Votes</MenuItem>
+        </Select>
+      </FormControl>
+    </Box>
   );
 };
 
