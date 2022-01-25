@@ -9,10 +9,17 @@ import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import Button from "@mui/material/Button";
 
+// Sort by imports
+
 import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+
+// Category imports
+
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
 const Layout = ({ children }) => {
   const pages = [
@@ -55,10 +62,11 @@ const Layout = ({ children }) => {
   ];
   const [sortBy, setSortBy] = useState("latest");
   const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("all");
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(search, sortBy);
+    console.log(search, sortBy, category);
     setSearch("");
   };
 
@@ -134,83 +142,111 @@ const Layout = ({ children }) => {
           </List>
         </Paper>
       </section>
-      <section
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "flex-start",
-          gap: "40px",
-        }}
-      >
+      <section style={{ marginTop: "10px" }}>
         <div
           style={{
             display: "flex",
-            alignItems: "center",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
+            gap: "40px",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "15px",
+            }}
+          >
+            <Typography
+              variant="subtitle"
+              sx={{ fontWeight: "500", color: "#d8e3e7" }}
+            >
+              Sort By
+            </Typography>
+            <SortSelect sortBy={sortBy} setSortBy={setSortBy} />
+          </div>
+          <form autoComplete="off" onSubmit={onSubmit}>
+            <FormControl>
+              <TextField
+                placeholder="Search"
+                sx={{
+                  background: "#d8e3e7",
+                  color: "#132c33",
+                  fontWeight: "500",
+                  height: "55px",
+                  width: "400px",
+                  borderRadius: "10px",
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    border: "none",
+                  },
+                  "&:hover .MuiOutlinedInput-notchedOutline": {
+                    border: "none",
+                  },
+                  "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
+                    border: "none",
+                  },
+                  "& .Mui-disabled .MuiOutlinedInput-notchedOutline": {
+                    border: "none",
+                  },
+                }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <i
+                        className="fi fi-rr-search"
+                        style={{ fontSize: "20px", paddingRight: "5px" }}
+                      />
+                    </InputAdornment>
+                  ),
+                }}
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            </FormControl>
+          </form>
+          <Button
+            sx={{
+              background: "#126e82",
+              color: "#d8e3e7",
+              width: "150px",
+              height: "50px",
+              borderRadius: "10px",
+              "&:hover": {
+                background: "#132c33",
+              },
+            }}
+            startIcon={
+              <i
+                className="fi fi-rr-magic-wand"
+                style={{ paddingLeft: "5px" }}
+              />
+            }
+          >
+            Create Post
+          </Button>
+        </div>
+        <div
+          style={{
+            display: "flex",
             justifyContent: "center",
-            gap: "15px",
+            gap: "20px",
+            alignItems: "center",
+            margin: "30px auto",
           }}
         >
           <Typography
             variant="subtitle"
             sx={{ fontWeight: "500", color: "#d8e3e7" }}
           >
-            Sort By
+            Categories
           </Typography>
-          <SortSelect sortBy={sortBy} setSortBy={setSortBy} />
+          <CategoriesToggleButton
+            category={category}
+            setCategory={setCategory}
+          />
         </div>
-        <form autoComplete="off" onSubmit={onSubmit}>
-          <FormControl>
-            <TextField
-              placeholder="Search"
-              sx={{
-                background: "#d8e3e7",
-                color: "#132c33",
-                fontWeight: "500",
-                height: "55px",
-                width: "400px",
-                borderRadius: "10px",
-                "& .MuiOutlinedInput-notchedOutline": {
-                  border: "none",
-                },
-                "&:hover .MuiOutlinedInput-notchedOutline": {
-                  border: "none",
-                },
-                "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
-                  border: "none",
-                },
-                "& .Mui-disabled .MuiOutlinedInput-notchedOutline": {
-                  border: "none",
-                },
-              }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <i
-                      className="fi fi-rr-search"
-                      style={{ fontSize: "20px", paddingRight: "5px" }}
-                    />
-                  </InputAdornment>
-                ),
-              }}
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </FormControl>
-        </form>
-        <Button
-          sx={{
-            background: "#126e82",
-            color: "#d8e3e7",
-            width: "150px",
-            height: "50px",
-            borderRadius: "10px",
-            "&:hover": {
-              background: "#132c33",
-            },
-          }}
-        >
-          Create Post
-        </Button>
       </section>
     </div>
   );
@@ -249,6 +285,43 @@ const SortSelect = ({ sortBy, setSortBy }) => {
         </Select>
       </FormControl>
     </Box>
+  );
+};
+
+const CategoriesToggleButton = ({ category, setCategory }) => {
+  const categories = [
+    "all",
+    "music",
+    "funny",
+    "videos",
+    "programming",
+    "news",
+    "fashion",
+  ];
+
+  return (
+    <ToggleButtonGroup
+      value={category}
+      exclusive
+      onChange={(e, newCategory) => setCategory(newCategory)}
+      sx={{
+        background: "#126e82",
+      }}
+    >
+      {categories.map((cate, index) => {
+        return (
+          <ToggleButton
+            value={cate}
+            key={index}
+            sx={{
+              color: "#d8e3e7",
+            }}
+          >
+            {cate}
+          </ToggleButton>
+        );
+      })}
+    </ToggleButtonGroup>
   );
 };
 
