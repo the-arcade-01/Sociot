@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Link } from "react-router-dom";
+
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import Avatar from "@mui/material/Avatar";
@@ -112,6 +114,8 @@ const SideDrawer = () => {
                 }}
                 button
                 divider
+                component={Link}
+                to="/"
               >
                 {page.icon}
                 <Typography variant="subtitle1" sx={{ fontWeight: "500" }}>

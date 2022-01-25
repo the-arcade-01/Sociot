@@ -25,14 +25,14 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Layout>
-        <Router>
+      <Router>
+        <Layout>
           <Routes>
             <Route exact path="/" element={<HomePage />} />
             <Route path="/create" element={<CreatePost />} />
           </Routes>
-        </Router>
-      </Layout>
+        </Layout>
+      </Router>
     </ThemeProvider>
   );
 };
