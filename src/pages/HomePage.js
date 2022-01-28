@@ -10,6 +10,7 @@ import Button from "@mui/material/Button";
 
 import SortSelect from "../components/HomePage/SortSelect";
 import CategoriesToggleButton from "../components/HomePage/CategoriesToggleButton";
+import PostLayout from "../components/HomePage/PostLayout";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -127,6 +128,7 @@ const HomePage = () => {
         </Typography>
         <CategoriesToggleButton category={category} setCategory={setCategory} />
       </div>
+      <PostLayout />
     </section>
   );
 };
