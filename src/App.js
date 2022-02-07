@@ -1,6 +1,6 @@
 import React from "react";
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material";
@@ -30,18 +30,17 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Router>
-        <AuthPage>
-          <Routes>
-            <Route path="/register" element={<SignupForm />} />
-            <Route path="/login" element={<LoginForm />} />
-          </Routes>
-        </AuthPage>
-
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<AuthPage />}>
+            <Route path="register" element={<SignupForm />} />
+            <Route path="login" element={<LoginForm />} />
+          </Route>
+        </Routes>
         <Routes>
           <Route path="/home" element={<HomePage />} />
         </Routes>
-      </Router>
+      </BrowserRouter>
     </ThemeProvider>
   );
 };

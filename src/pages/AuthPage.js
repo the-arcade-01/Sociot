@@ -1,8 +1,10 @@
 import React from "react";
 
+import { Outlet } from "react-router-dom";
+
 import Box from "@mui/material/Box";
 
-const AuthPage = ({ children }) => {
+const AuthPage = () => {
   return (
     <Box
       sx={{
@@ -27,7 +29,9 @@ const AuthPage = ({ children }) => {
           gap: "10px",
         }}
       >
-        <div style={{ paddingLeft: "50px" }}>{children}</div>
+        <div style={{ paddingLeft: "50px" }}>
+          <Outlet />
+        </div>
         <Box
           component="img"
           src="assets/Auth.svg"
