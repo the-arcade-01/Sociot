@@ -1,17 +1,14 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-
-import UserContext from "../store/UserContext";
 
 const HomePage = () => {
   const [message, setMessage] = useState("");
 
-  const { user } = useContext(UserContext);
-
   useEffect(() => {
+    const token = localStorage.getItem("auth-token");
     axios
       .get("http://localhost:8000/private", {
-        headers: { "auth-token": user.token },
+        headers: { "auth-token": token },
       })
       .then((res) => {
         console.log(res);

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -10,7 +10,7 @@ import HomePage from "./pages/HomePage";
 import SignupForm from "./components/AuthForms/SignupForm";
 import LoginForm from "./components/AuthForms/LoginForm";
 
-import UserContext from "./store/UserContext";
+import { UserContextProvider } from "./store/UserContext";
 
 /*
   blue: #1da1f2
@@ -29,16 +29,11 @@ const theme = createTheme({
 });
 
 const App = () => {
-  const [user, setUser] = useState({ token: null });
-  useEffect(() => {
-    const token = localStorage.getItem("auth-token");
-    setUser({ token });
-  }, []);
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <BrowserRouter>
-        <UserContext.Provider value={{ user, setUser }}>
+        <UserContextProvider>
           <Routes>
             <Route path="/" element={<AuthPage />}>
               <Route path="register" element={<SignupForm />} />
@@ -48,7 +43,7 @@ const App = () => {
           <Routes>
             <Route path="/home" element={<HomePage />} />
           </Routes>
-        </UserContext.Provider>
+        </UserContextProvider>
       </BrowserRouter>
     </ThemeProvider>
   );

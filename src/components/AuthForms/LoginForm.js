@@ -18,7 +18,7 @@ const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { setUser } = useContext(UserContext);
+  const user = useContext(UserContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,9 +31,8 @@ const LoginForm = () => {
       })
       .then((res) => {
         const token = res.data.token;
-        console.log(token);
-        setUser({ token });
-        localStorage.setItem("auth-token", token);
+        user.addUser(token);
+        console.log(user.token);
         navigate("/home");
       })
       .catch((err) => console.log(err));
