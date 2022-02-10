@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
 
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+
+import UserContext from "../../store/UserContext";
 
 import axios from "axios";
 
@@ -16,6 +18,8 @@ const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const { setUser } = useContext(UserContext);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(email, password);
@@ -26,7 +30,10 @@ const LoginForm = () => {
         password: password,
       })
       .then((res) => {
-        console.log(res);
+        const token = res.data.token;
+        console.log(token);
+        setUser({ token });
+        localStorage.setItem("auth-token", token);
         navigate("/home");
       })
       .catch((err) => console.log(err));
