@@ -6,9 +6,9 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
-import UserContext from "../../store/UserContext";
-
 import axios from "axios";
+
+import UserContext from "../../store/UserContext";
 
 const LoginForm = () => {
   const { REACT_APP_API_ENDPOINT } = process.env;
@@ -18,11 +18,10 @@ const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const user = useContext(UserContext);
+  const UserCtx = useContext(UserContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email, password);
 
     axios
       .post(`${REACT_APP_API_ENDPOINT}/login`, {
@@ -30,9 +29,10 @@ const LoginForm = () => {
         password: password,
       })
       .then((res) => {
-        const token = res.data.token;
-        user.addUser(token);
-        console.log(user.token);
+        const { token, user } = res.data;
+        UserCtx.setUserData(user);
+        localStorage.removeItem("auth-token");
+        localStorage.setItem("auth-token", token);
         navigate("/home");
       })
       .catch((err) => console.log(err));

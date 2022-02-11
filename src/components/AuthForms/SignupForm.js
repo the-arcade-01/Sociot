@@ -20,7 +20,6 @@ const SignupForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(name, username, email, password);
 
     axios
       .post(`${REACT_APP_API_ENDPOINT}/register`, {
@@ -30,7 +29,6 @@ const SignupForm = () => {
         password: password,
       })
       .then((res) => {
-        console.log(res);
         navigate("/login");
       })
       .catch((err) => console.log(err));
