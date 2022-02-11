@@ -3,6 +3,8 @@ import axios from "axios";
 
 import UserContext from "../store/UserContext";
 
+import LogoutUser from "../components/AuthForms/LogoutUser";
+
 const HomePage = () => {
   const [message, setMessage] = useState("");
 
@@ -25,6 +27,7 @@ const HomePage = () => {
       <h1>
         {UserCtx.userData.name} {message}
       </h1>
+      <LogoutUser />
     </div>
   );
 };
