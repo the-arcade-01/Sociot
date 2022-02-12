@@ -34,7 +34,7 @@ const AuthPage = () => {
         </div>
         <Box
           component="img"
-          src="assets/Auth.svg"
+          src="assets/auth.svg"
           sx={{
             height: "700px",
             width: "700px",
