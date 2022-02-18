@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
@@ -10,7 +10,7 @@ import Avatar from "@mui/material/Avatar";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
+import Button from "@mui/material/Button";
 
 import LogoutUser from "../AuthForms/LogoutUser";
 
@@ -65,6 +65,8 @@ const LeftDrawer = () => {
     // },
   ];
 
+  const navigate = useNavigate();
+
   return (
     <Drawer
       sx={{
@@ -81,7 +83,8 @@ const LeftDrawer = () => {
       <Box
         component="img"
         src="assets/sociot-logo.png"
-        sx={{ transform: "scale(40%)", marginTop: "15px" }}
+        sx={{ transform: "scale(40%)", marginTop: "15px", cursor: "pointer" }}
+        onClick={() => navigate("/home")}
       />
       <Paper sx={{ marginLeft: "50px", marginTop: "10px" }}>
         <List
@@ -93,7 +96,7 @@ const LeftDrawer = () => {
           {pages.map((page) => {
             return (
               <ListItemButton sx={{ borderRadius: "50px" }}>
-                <ListItemIcon sx={{ color: "rgba(0, 0, 0, 0.87)" }}>
+                <ListItemIcon sx={{ color: "#14171a" }}>
                   {page.icon}
                 </ListItemIcon>
                 <Typography
@@ -109,6 +112,74 @@ const LeftDrawer = () => {
             );
           })}
         </List>
+      </Paper>
+      <Button
+        sx={{
+          background: "#1da1f2",
+          color: "#fff",
+          width: "210px",
+          height: "60px",
+          borderRadius: "50px",
+          "&:hover": {
+            background: "#0C85D0",
+          },
+          fontSize: "18px",
+          fontWeight: "700",
+          textTransform: "none",
+          fontFamily: "Inter",
+          margin: "35px 0 0 60px",
+        }}
+        startIcon={
+          <i
+            className="fi fi-rr-magic-wand"
+            style={{ padding: "5px 8px 0 0" }}
+          />
+        }
+      >
+        Create Post
+      </Button>
+      <Paper
+        sx={{
+          width: "250px",
+          height: "75px",
+          display: "flex",
+          alignItems: "center",
+          padding: "5px 15px",
+          gap: "15px",
+          marginBottom: "30px",
+          cursor: "pointer",
+          borderRadius: "50px",
+          "&:hover": {
+            background: "#f5f5f5",
+          },
+          paddingLeft: "20px",
+          margin: "150px 0 0 35px",
+        }}
+      >
+        <Avatar
+          alt="avatar"
+          src="images/taichi.png"
+          sx={{ width: 45, height: 45 }}
+        />
+        <div>
+          <Typography
+            variant="body1"
+            sx={{ fontWeight: "700", flexWrap: "nowrap" }}
+          >
+            Aashish
+          </Typography>
+          <Typography
+            sx={{
+              fontWeight: "500",
+              fontSize: "15px",
+              color: "#657786",
+              marginTop: "-3px",
+            }}
+          >
+            @the-arcade-01
+          </Typography>
+        </div>
+        <i className="fi fi-rr-menu-dots-vertical" />
       </Paper>
     </Drawer>
   );
