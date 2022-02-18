@@ -17,14 +17,14 @@ const Footer = () => {
         textAlign: "center",
       }}
     >
-      <Typography sx={{ fontWeight: "500" }}>
+      <Typography sx={{ fontWeight: "500", fontFamily: "Inter" }}>
         {" "}
         &copy; Made by{" "}
         <a
           href="https://github.com/the-arcade-01"
           style={{
             textDecoration: "none",
-            fontWeight: "600",
+            fontWeight: "700",
             color: "#1da1f2",
           }}
           target="_blank"
