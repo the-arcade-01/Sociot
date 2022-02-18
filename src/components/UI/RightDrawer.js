@@ -3,7 +3,7 @@ import React from "react";
 import Drawer from "@mui/material/Drawer";
 import Typography from "@mui/material/Typography";
 
-const drawerWidth = 250;
+const drawerWidth = 300;
 
 const RightDrawer = () => {
   return (
