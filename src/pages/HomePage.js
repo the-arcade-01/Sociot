@@ -22,7 +22,7 @@ const HomePage = () => {
       .catch((err) => console.log(err));
   }, []);
   return (
-    <div>
+    <div style={{ marginLeft: "350px", marginTop: "25px" }}>
       <h1>Home Page</h1>
       <h1>
         {UserCtx.userData.name} {message}

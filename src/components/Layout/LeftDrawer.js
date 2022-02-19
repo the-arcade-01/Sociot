@@ -150,7 +150,7 @@ const LeftDrawer = () => {
           cursor: "pointer",
           borderRadius: "50px",
           "&:hover": {
-            background: "#f5f5f5",
+            background: "#e1e8ed",
           },
           paddingLeft: "20px",
           margin: "150px 0 0 35px",

@@ -12,7 +12,7 @@ const Layout = () => {
     <Box component="div">
       <LeftDrawer />
       <RightDrawer />
-      {/* <Outlet /> */}
+      <Outlet />
       <Footer />
     </Box>
   );
