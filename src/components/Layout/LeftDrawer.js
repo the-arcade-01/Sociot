@@ -163,8 +163,8 @@ const LeftDrawer = () => {
       >
         <Avatar
           alt="avatar"
-          src="images/taichi.png"
-          sx={{ width: 45, height: 45 }}
+          src="assets/taichi.png"
+          sx={{ width: 50, height: 50, background: "#f5f8fa" }}
         />
         <div>
           <Typography

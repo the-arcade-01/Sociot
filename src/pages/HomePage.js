@@ -4,6 +4,7 @@ import axios from "axios";
 import UserContext from "../store/UserContext";
 
 import LogoutUser from "../components/AuthForms/LogoutUser";
+import PostCard from "../components/HomePage/PostCard";
 
 import Typography from "@mui/material/Typography";
 
@@ -31,13 +32,13 @@ const HomePage = () => {
         marginLeft: "325px",
         width: "750px",
         // background: "#aab8c2",
-        padding: "15px 20px",
       }}
     >
       <div
         style={{
           display: "flex",
           justifyContent: "space-between",
+          padding: "15px 20px",
         }}
       >
         <Typography variant="h6" sx={{ fontWeight: "700" }}>
@@ -47,13 +48,11 @@ const HomePage = () => {
           variant="body1"
           sx={{ fontWeight: "500", fontFamily: "Inter" }}
         >
-          {format(new Date(), "do MMMM Y")}
+          {format(new Date(), "do MMM y")}
         </Typography>
       </div>
-      <h1>
-        {UserCtx.userData.name} {message}
-      </h1>
-      <LogoutUser />
+      <PostCard />
+      {/* <LogoutUser /> */}
     </div>
   );
 };

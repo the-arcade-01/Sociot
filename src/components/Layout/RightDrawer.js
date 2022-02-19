@@ -73,6 +73,28 @@ const RightDrawer = () => {
           );
         })}
       </ToggleButtonGroup>
+      <Typography
+        sx={{
+          fontWeight: "500",
+          fontFamily: "Inter",
+          margin: "225px 0px 0px 43px",
+        }}
+      >
+        {" "}
+        &copy; Made by{" "}
+        <a
+          href="https://github.com/the-arcade-01"
+          style={{
+            textDecoration: "none",
+            fontWeight: "700",
+            color: "#1da1f2",
+          }}
+          target="_blank"
+          rel="noreferrer"
+        >
+          Aashish Koshti
+        </a>
+      </Typography>
     </Drawer>
   );
 };

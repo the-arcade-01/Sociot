@@ -13,7 +13,7 @@ const Layout = () => {
       <LeftDrawer />
       <RightDrawer />
       <Outlet />
-      <Footer />
+      {/* <Footer /> */}
     </Box>
   );
 };
