@@ -83,7 +83,12 @@ const LeftDrawer = () => {
       <Box
         component="img"
         src="assets/sociot-logo.png"
-        sx={{ transform: "scale(40%)", marginTop: "15px", cursor: "pointer" }}
+        sx={{
+          transform: "scale(35%)",
+          marginTop: "15px",
+          cursor: "pointer",
+          marginLeft: "-60px",
+        }}
         onClick={() => navigate("/home")}
       />
       <Paper sx={{ marginLeft: "50px", marginTop: "10px" }}>
@@ -102,7 +107,7 @@ const LeftDrawer = () => {
                 <Typography
                   sx={{
                     fontWeight: "500",
-                    fontFamily: "Inter",
+                    fontFamily: "Open Sans",
                     fontSize: "20px",
                   }}
                 >

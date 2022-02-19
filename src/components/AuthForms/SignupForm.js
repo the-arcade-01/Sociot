@@ -47,7 +47,7 @@ const SignupForm = () => {
         flexDirection: "column",
       }}
     >
-      <Typography variant="h4" sx={{ fontWeight: "600" }}>
+      <Typography variant="h4" sx={{ fontWeight: "600", fontFamily: "Inter" }}>
         Hello, new here?
       </Typography>
       <form
@@ -86,13 +86,14 @@ const SignupForm = () => {
             "&:hover": {
               backgroundColor: "#1da1f2",
             },
+            fontFamily: "Inter",
           }}
           type="submit"
         >
           Register
         </Button>
       </form>
-      <Typography variant="body1">
+      <Typography variant="body1" sx={{ fontFamily: "Inter" }}>
         Already have an account?{" "}
         <Link
           to="/login"

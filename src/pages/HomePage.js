@@ -5,6 +5,10 @@ import UserContext from "../store/UserContext";
 
 import LogoutUser from "../components/AuthForms/LogoutUser";
 
+import Typography from "@mui/material/Typography";
+
+import { format } from "date-fns";
+
 const HomePage = () => {
   const [message, setMessage] = useState("");
 
@@ -22,8 +26,30 @@ const HomePage = () => {
       .catch((err) => console.log(err));
   }, []);
   return (
-    <div style={{ marginLeft: "350px", marginTop: "25px" }}>
-      <h1>Home Page</h1>
+    <div
+      style={{
+        marginLeft: "325px",
+        width: "750px",
+        // background: "#aab8c2",
+        padding: "15px 20px",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
+        <Typography variant="h6" sx={{ fontWeight: "700" }}>
+          Home
+        </Typography>
+        <Typography
+          variant="body1"
+          sx={{ fontWeight: "500", fontFamily: "Inter" }}
+        >
+          {format(new Date(), "do MMMM Y")}
+        </Typography>
+      </div>
       <h1>
         {UserCtx.userData.name} {message}
       </h1>
