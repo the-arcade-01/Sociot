@@ -4,7 +4,7 @@ import axios from "axios";
 import UserContext from "../store/UserContext";
 
 import LogoutUser from "../components/AuthForms/LogoutUser";
-import PostCard from "../components/HomePage/PostCard";
+import PostCard from "../components/PostDisplays/PostCard";
 
 import Typography from "@mui/material/Typography";
 

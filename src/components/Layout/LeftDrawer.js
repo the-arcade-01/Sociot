@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
 
@@ -13,6 +13,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import Button from "@mui/material/Button";
 
 import LogoutUser from "../AuthForms/LogoutUser";
+import CreateModalPage from "../../pages/CreateModalPage";
 
 const drawerWidth = 325;
 
@@ -66,6 +67,8 @@ const LeftDrawer = () => {
   ];
 
   const navigate = useNavigate();
+
+  const [openCreateModal, setOpenCreateModal] = useState(false);
 
   return (
     <Drawer
@@ -140,9 +143,14 @@ const LeftDrawer = () => {
             style={{ padding: "5px 8px 0 0" }}
           />
         }
+        onClick={() => setOpenCreateModal(true)}
       >
         Create Post
       </Button>
+      <CreateModalPage
+        setOpenCreateModal={setOpenCreateModal}
+        openCreateModal={openCreateModal}
+      />
       <Paper
         sx={{
           width: "250px",

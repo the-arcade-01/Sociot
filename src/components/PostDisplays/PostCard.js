@@ -27,25 +27,47 @@ const PostCard = () => {
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "5px",
-              alignSelf: "flex-start",
+              justifyContent: "space-between",
             }}
           >
-            <Typography
-              variant="body1"
-              sx={{ fontWeight: "700", flexWrap: "nowrap" }}
-            >
-              Aashish
-            </Typography>
-            <Typography
-              sx={{
-                fontWeight: "500",
-                fontSize: "15px",
-                color: "#657786",
-                marginTop: "-3px",
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "5px",
+                alignSelf: "flex-start",
               }}
             >
-              @the-arcade-01
+              <Typography
+                variant="body1"
+                sx={{ fontWeight: "700", flexWrap: "nowrap" }}
+              >
+                Aashish
+              </Typography>
+              <Typography
+                sx={{
+                  fontWeight: "500",
+                  fontSize: "15px",
+                  color: "#657786",
+                  marginTop: "-3px",
+                }}
+              >
+                @the-arcade-01
+              </Typography>
+            </div>
+            <Typography
+              variant="body2"
+              sx={{
+                background: "#65BFF6",
+                padding: "4px 12px",
+                borderRadius: "50px",
+                color: "#fff",
+                fontWeight: "600",
+                fontFamily: "Inter",
+                marginTop: "-2px",
+              }}
+            >
+              Videos
             </Typography>
           </div>
           <div>
@@ -102,6 +124,29 @@ const PostCard = () => {
                 </Typography>
               </div>
               <i className="fi fi-rr-bookmark" style={{ color: "#657786" }} />
+              <div
+                style={{
+                  display: "flex",
+                  gap: "15px",
+                  cursor: "pointer",
+                }}
+              >
+                <i
+                  className="fi fi-rr-pencil"
+                  style={{
+                    color: "#657786",
+                  }}
+                />
+                <Typography
+                  variant="body2"
+                  sx={{
+                    fontFamily: "Inter",
+                    color: "#657786",
+                  }}
+                >
+                  Edit
+                </Typography>
+              </div>
             </div>
           </div>
         </div>
