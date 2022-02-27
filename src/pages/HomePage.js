@@ -39,6 +39,10 @@ const HomePage = () => {
           display: "flex",
           justifyContent: "space-between",
           padding: "15px 20px",
+          position: "sticky",
+          zIndex: 1,
+          top: 0,
+          background: "#fff",
         }}
       >
         <Typography variant="h6" sx={{ fontWeight: "700" }}>

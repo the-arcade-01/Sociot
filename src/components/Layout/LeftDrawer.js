@@ -103,7 +103,7 @@ const LeftDrawer = () => {
         >
           {pages.map((page) => {
             return (
-              <ListItemButton sx={{ borderRadius: "50px" }}>
+              <ListItemButton key={page.page} sx={{ borderRadius: "50px" }}>
                 <ListItemIcon sx={{ color: "#14171a" }}>
                   {page.icon}
                 </ListItemIcon>
