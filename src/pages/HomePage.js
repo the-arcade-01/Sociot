@@ -1,28 +1,23 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-
-import UserContext from "../store/UserContext";
-
-import LogoutUser from "../components/AuthForms/LogoutUser";
-import PostCard from "../components/PostDisplays/PostCard";
 
 import Typography from "@mui/material/Typography";
 
 import { format } from "date-fns";
+import FeedDisplay from "../components/Feed/FeedDisplay";
 
 const HomePage = () => {
-  const [message, setMessage] = useState("");
-
-  const UserCtx = useContext(UserContext);
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const token = localStorage.getItem("auth-token");
     axios
-      .get("http://localhost:8000/private", {
+      .get(`${process.env.REACT_APP_API_ENDPOINT}/posts`, {
         headers: { "auth-token": token },
       })
       .then((res) => {
-        setMessage(res.data.message);
+        console.log(res.data);
+        setPosts(res.data.posts);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -55,8 +50,7 @@ const HomePage = () => {
           {format(new Date(), "do MMM y")}
         </Typography>
       </div>
-      <PostCard />
-      {/* <LogoutUser /> */}
+      <FeedDisplay posts={posts} />
     </div>
   );
 };

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import CssBaseline from "@mui/material/CssBaseline";
-import { createTheme, ThemeProvider } from "@mui/material";
+import { createTheme, formControlClasses, ThemeProvider } from "@mui/material";
 
 import Layout from "./components/Layout/Layout";
 import AuthPage from "./pages/AuthPage";
@@ -25,7 +25,7 @@ import axios from "axios";
 
 const theme = createTheme({
   typography: {
-    fontFamily: ["Open Sans","Inter", "Ubuntu", "Nunito"].join(","),
+    fontFamily: ["Open Sans", "Inter", "Ubuntu", "Nunito"].join(","),
   },
   shadows: Array(25).fill("none"),
 });

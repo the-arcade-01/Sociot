@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
 
@@ -11,9 +11,13 @@ import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 
 import LogoutUser from "../AuthForms/LogoutUser";
 import CreateModalPage from "../../pages/CreateModalPage";
+
+import UserContext from "../../store/UserContext";
 
 const drawerWidth = 325;
 
@@ -55,20 +59,22 @@ const LeftDrawer = () => {
       ),
       page: "Saved Posts",
     },
-    // {
-    //   icon: (
-    //     <i
-    //       className="fi fi-rr-sign-out-alt"
-    //       style={{ fontSize: "25px", marginTop: "5px" }}
-    //     />
-    //   ),
-    //   page: "Logout",
-    // },
   ];
+
+  const UserCtx = useContext(UserContext);
 
   const navigate = useNavigate();
 
   const [openCreateModal, setOpenCreateModal] = useState(false);
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <Drawer
@@ -179,7 +185,7 @@ const LeftDrawer = () => {
             variant="body1"
             sx={{ fontWeight: "700", flexWrap: "nowrap" }}
           >
-            Aashish
+            {UserCtx.userData.name}
           </Typography>
           <Typography
             sx={{
@@ -189,10 +195,27 @@ const LeftDrawer = () => {
               marginTop: "-3px",
             }}
           >
-            @the-arcade-01
+            @{UserCtx.userData.username}
           </Typography>
         </div>
-        <i className="fi fi-rr-menu-dots-vertical" />
+        <i
+          className="fi fi-rr-menu-dots-vertical"
+          aria-controls={open ? "basic-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+          onClick={handleClick}
+        />
+        <Menu
+          id="basic-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          sx={{ marginTop: "-20px" }}
+        >
+          <MenuItem onClick={handleClose}>
+            <LogoutUser />
+          </MenuItem>
+        </Menu>
       </Paper>
     </Drawer>
   );

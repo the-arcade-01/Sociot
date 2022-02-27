@@ -5,7 +5,6 @@ import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 
 import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 
 import axios from "axios";
@@ -27,14 +26,25 @@ const style = {
 };
 
 const CreateModalPage = ({ openCreateModal, setOpenCreateModal }) => {
-  const [title, setTitle] = useState("");
   const [text, setText] = useState("");
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log({ title, text });
-    setTitle("");
-    setText("");
+    // e.preventDefault();
+    const token = localStorage.getItem("auth-token");
+
+    axios
+      .post(
+        `${process.env.REACT_APP_API_ENDPOINT}/posts/create`,
+        { text },
+        {
+          headers: { "auth-token": token },
+        }
+      )
+      .then(() => {
+        setText("");
+        setOpenCreateModal(false);
+      })
+      .catch((err) => console.log(err));
   };
   return (
     <div>
@@ -52,12 +62,6 @@ const CreateModalPage = ({ openCreateModal, setOpenCreateModal }) => {
         <Fade in={openCreateModal}>
           <form onSubmit={handleSubmit}>
             <Box sx={style}>
-              <TextField
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                label="Title"
-                sx={{ fontFamily: "Inter" }}
-              />
               <TextareaAutosize
                 style={{
                   minHeight: "100px",

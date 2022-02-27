@@ -15,6 +15,7 @@ const LogoutUser = () => {
         localStorage.removeItem("auth-token");
         navigate("/login");
       }}
+      sx={{ textTransform: "none", color: "#14171a" }}
     >
       Log out
     </Button>

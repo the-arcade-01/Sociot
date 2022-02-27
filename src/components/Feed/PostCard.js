@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 
-const PostCard = () => {
+import UserContext from "../../store/UserContext";
+
+const PostCard = ({ post }) => {
+  const UserCtx = useContext(UserContext);
   return (
     <Paper
       sx={{
@@ -42,7 +45,7 @@ const PostCard = () => {
                 variant="body1"
                 sx={{ fontWeight: "700", flexWrap: "nowrap" }}
               >
-                Aashish
+                {post._creator.name}
               </Typography>
               <Typography
                 sx={{
@@ -52,7 +55,7 @@ const PostCard = () => {
                   marginTop: "-3px",
                 }}
               >
-                @the-arcade-01
+                @{post._creator.username}
               </Typography>
             </div>
             <Typography
@@ -72,18 +75,17 @@ const PostCard = () => {
           </div>
           <div>
             <Typography variant="body1" sx={{ fontFamily: "Inter" }}>
-              If fate were real, then I would say meeting someone new would
-              constitute such a thing.
+              {post.text}
             </Typography>
-            <Typography>
+            {/* <Typography>
               <a
                 href="https://www.youtube.com/watch?v=iDR7Je5ORwg"
                 style={{ textDecoration: "none", color: "#1da1f2" }}
               >
                 https://www.youtube.com/watch?v=iDR7Je...
               </a>
-            </Typography>
-            <Box
+            </Typography> */}
+            {/* <Box
               component="img"
               src="assets/monkey.jpeg"
               sx={{
@@ -92,7 +94,7 @@ const PostCard = () => {
                 marginTop: "10px",
                 borderRadius: "15px",
               }}
-            />
+            /> */}
             <div
               style={{
                 display: "flex",
@@ -131,21 +133,27 @@ const PostCard = () => {
                   cursor: "pointer",
                 }}
               >
-                <i
-                  className="fi fi-rr-pencil"
-                  style={{
-                    color: "#657786",
-                  }}
-                />
-                <Typography
-                  variant="body2"
-                  sx={{
-                    fontFamily: "Inter",
-                    color: "#657786",
-                  }}
-                >
-                  Edit
-                </Typography>
+                {post._creator._id === UserCtx.userData._id ? (
+                  <div>
+                    <i
+                      className="fi fi-rr-pencil"
+                      style={{
+                        color: "#657786",
+                      }}
+                    />
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        fontFamily: "Inter",
+                        color: "#657786",
+                      }}
+                    >
+                      Edit
+                    </Typography>
+                  </div>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
           </div>
