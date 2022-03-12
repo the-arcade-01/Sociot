@@ -1,26 +1,33 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+import { useLocation } from "react-router-dom";
+
 import Typography from "@mui/material/Typography";
 
 import { format } from "date-fns";
 import FeedDisplay from "../components/Feed/FeedDisplay";
 
 const HomePage = () => {
-  const [posts, setPosts] = useState([]);
+  const [feeds, setFeeds] = useState([]);
+  const location = useLocation();
 
   useEffect(() => {
     const token = localStorage.getItem("auth-token");
+    let URL = `${process.env.REACT_APP_API_ENDPOINT}/posts`;
+    if (location.pathname === "/posts") {
+      URL += "/userPosts";
+    }
     axios
-      .get(`${process.env.REACT_APP_API_ENDPOINT}/posts`, {
+      .get(URL, {
         headers: { "auth-token": token },
       })
       .then((res) => {
         console.log(res.data);
-        setPosts(res.data.posts);
+        setFeeds(res.data.posts);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [location]);
   return (
     <div
       style={{
@@ -50,7 +57,7 @@ const HomePage = () => {
           {format(new Date(), "do MMM y")}
         </Typography>
       </div>
-      <FeedDisplay posts={posts} />
+      <FeedDisplay feeds={feeds} />
     </div>
   );
 };

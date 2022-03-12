@@ -1,11 +1,11 @@
 import React from "react";
 import PostCard from "./PostCard";
 
-const FeedDisplay = ({ posts }) => {
+const FeedDisplay = ({ feeds }) => {
   return (
     <>
-      {posts.map((post) => {
-        return <PostCard key={post._id} post={post} />;
+      {feeds.map((feed) => {
+        return <PostCard key={feed._id} feed={feed} />;
       })}
     </>
   );

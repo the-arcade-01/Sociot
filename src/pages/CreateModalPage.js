@@ -8,6 +8,7 @@ import Button from "@mui/material/Button";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -27,12 +28,12 @@ const style = {
 
 const CreateModalPage = ({ openCreateModal, setOpenCreateModal }) => {
   const [text, setText] = useState("");
-
-  const handleSubmit = (e) => {
-    // e.preventDefault();
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const token = localStorage.getItem("auth-token");
 
-    axios
+    await axios
       .post(
         `${process.env.REACT_APP_API_ENDPOINT}/posts/create`,
         { text },
@@ -45,6 +46,7 @@ const CreateModalPage = ({ openCreateModal, setOpenCreateModal }) => {
         setOpenCreateModal(false);
       })
       .catch((err) => console.log(err));
+    navigate("/home", { replace: true });
   };
   return (
     <div>

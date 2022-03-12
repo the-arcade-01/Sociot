@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
@@ -31,6 +31,7 @@ const LeftDrawer = () => {
         />
       ),
       page: "Home",
+      value: "/home",
     },
     {
       icon: (
@@ -40,6 +41,7 @@ const LeftDrawer = () => {
         />
       ),
       page: "Your Posts",
+      value: "/posts",
     },
     {
       icon: (
@@ -49,6 +51,7 @@ const LeftDrawer = () => {
         />
       ),
       page: "Your Activity",
+      value: "/activity",
     },
     {
       icon: (
@@ -58,12 +61,15 @@ const LeftDrawer = () => {
         />
       ),
       page: "Saved Posts",
+      value: "/saved",
     },
   ];
 
   const UserCtx = useContext(UserContext);
 
   const navigate = useNavigate();
+  const location = useLocation();
+  console.log(location);
 
   const [openCreateModal, setOpenCreateModal] = useState(false);
 
@@ -109,7 +115,14 @@ const LeftDrawer = () => {
         >
           {pages.map((page) => {
             return (
-              <ListItemButton key={page.page} sx={{ borderRadius: "50px" }}>
+              <ListItemButton
+                key={page.page}
+                sx={{
+                  borderRadius: "50px",
+                  background:
+                    location.pathname === page.value ? "#f5f5f5" : null,
+                }}
+              >
                 <ListItemIcon sx={{ color: "#14171a" }}>
                   {page.icon}
                 </ListItemIcon>
@@ -118,6 +131,7 @@ const LeftDrawer = () => {
                     fontWeight: "500",
                     fontFamily: "Open Sans",
                     fontSize: "20px",
+                    fontWeight: location.pathname === page.value ? "600" : null,
                   }}
                 >
                   {page.page}

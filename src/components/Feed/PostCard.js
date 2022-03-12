@@ -3,11 +3,10 @@ import React, { useContext } from "react";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import Avatar from "@mui/material/Avatar";
-import Box from "@mui/material/Box";
 
 import UserContext from "../../store/UserContext";
 
-const PostCard = ({ post }) => {
+const PostCard = ({ feed }) => {
   const UserCtx = useContext(UserContext);
   return (
     <Paper
@@ -45,7 +44,7 @@ const PostCard = ({ post }) => {
                 variant="body1"
                 sx={{ fontWeight: "700", flexWrap: "nowrap" }}
               >
-                {post._creator.name}
+                {feed._creator.name}
               </Typography>
               <Typography
                 sx={{
@@ -55,7 +54,7 @@ const PostCard = ({ post }) => {
                   marginTop: "-3px",
                 }}
               >
-                @{post._creator.username}
+                @{feed._creator.username}
               </Typography>
             </div>
             <Typography
@@ -68,6 +67,8 @@ const PostCard = ({ post }) => {
                 fontWeight: "600",
                 fontFamily: "Inter",
                 marginTop: "-2px",
+                position: "absolute",
+                right: "340px",
               }}
             >
               Videos
@@ -75,7 +76,7 @@ const PostCard = ({ post }) => {
           </div>
           <div>
             <Typography variant="body1" sx={{ fontFamily: "Inter" }}>
-              {post.text}
+              {feed.text}
             </Typography>
             {/* <Typography>
               <a
@@ -133,7 +134,7 @@ const PostCard = ({ post }) => {
                   cursor: "pointer",
                 }}
               >
-                {post._creator._id === UserCtx.userData._id ? (
+                {feed._creator._id === UserCtx.userData.id ? (
                   <div>
                     <i
                       className="fi fi-rr-pencil"
@@ -141,15 +142,6 @@ const PostCard = ({ post }) => {
                         color: "#657786",
                       }}
                     />
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        fontFamily: "Inter",
-                        color: "#657786",
-                      }}
-                    >
-                      Edit
-                    </Typography>
                   </div>
                 ) : (
                   ""
