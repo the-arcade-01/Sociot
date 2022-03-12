@@ -89,21 +89,28 @@ const PostCard = ({ feed }) => {
                 right: "340px",
               }}
             >
-              Videos
+              {feed.category}
             </Typography>
           </div>
           <div>
             <Typography variant="body1" sx={{ fontFamily: "Inter" }}>
               {feed.text}
             </Typography>
-            {/* <Typography>
-              <a
-                href="https://www.youtube.com/watch?v=iDR7Je5ORwg"
-                style={{ textDecoration: "none", color: "#1da1f2" }}
-              >
-                https://www.youtube.com/watch?v=iDR7Je...
-              </a>
-            </Typography> */}
+            {feed.link && (
+              <Typography>
+                <a
+                  href={feed.link}
+                  style={{ textDecoration: "none", color: "#1da1f2" }}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {feed.link.length > 50
+                    ? `${feed.link.substr(0, 50)} ...`
+                    : feed.link}
+                </a>
+              </Typography>
+            )}
+
             {/* <Box
               component="img"
               src="assets/monkey.jpeg"

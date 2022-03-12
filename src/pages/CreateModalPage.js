@@ -39,7 +39,7 @@ const CreateModalPage = ({ openCreateModal, setOpenCreateModal }) => {
   const [link, setLink] = useState("");
   const navigate = useNavigate();
 
-  const [category, setCategory] = useState("all");
+  const [category, setCategory] = useState("All");
 
   const handleChange = (event) => {
     setCategory(event.target.value);
@@ -52,7 +52,7 @@ const CreateModalPage = ({ openCreateModal, setOpenCreateModal }) => {
     await axios
       .post(
         `${process.env.REACT_APP_API_ENDPOINT}/posts/create`,
-        { text },
+        { text, link, category },
         {
           headers: { "auth-token": token },
         }

@@ -7,7 +7,7 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
 import { categories } from "../utils/categoryArray";
 
-const drawerWidth = 300;
+const drawerWidth = 315;
 
 const RightDrawer = () => {
   const [category, setCategory] = useState("all");
