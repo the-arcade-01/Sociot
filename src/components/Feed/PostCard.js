@@ -118,7 +118,10 @@ const PostCard = ({ feed }) => {
                 </Typography>
               </div>
               <div style={{ display: "flex", gap: "15px" }}>
-                <i className="fi fi-rr-heart" style={{ color: "#657786" }} />
+                <i
+                  className="fi fi-rr-thumbs-up"
+                  style={{ color: "#657789" }}
+                />
                 <Typography
                   variant="body2"
                   sx={{ fontFamily: "Inter", color: "#657786" }}

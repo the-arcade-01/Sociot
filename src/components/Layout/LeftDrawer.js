@@ -19,52 +19,11 @@ import CreateModalPage from "../../pages/CreateModalPage";
 
 import UserContext from "../../store/UserContext";
 
+import { pages } from "../utils/pageArray";
+
 const drawerWidth = 325;
 
 const LeftDrawer = () => {
-  const pages = [
-    {
-      icon: (
-        <i
-          className="fi fi-rr-home"
-          style={{ fontSize: "25px", marginTop: "5px" }}
-        />
-      ),
-      page: "Home",
-      value: "/home",
-    },
-    {
-      icon: (
-        <i
-          className="fi fi-rr-picture"
-          style={{ fontSize: "25px", marginTop: "5px" }}
-        />
-      ),
-      page: "Your Posts",
-      value: "/posts",
-    },
-    {
-      icon: (
-        <i
-          className="fi fi-rr-time-fast"
-          style={{ fontSize: "25px", marginTop: "5px" }}
-        />
-      ),
-      page: "Your Activity",
-      value: "/activity",
-    },
-    {
-      icon: (
-        <i
-          className="fi fi-rr-bookmark"
-          style={{ fontSize: "25px", marginTop: "5px" }}
-        />
-      ),
-      page: "Saved Posts",
-      value: "/saved",
-    },
-  ];
-
   const UserCtx = useContext(UserContext);
 
   const navigate = useNavigate();
@@ -122,16 +81,18 @@ const LeftDrawer = () => {
                   background:
                     location.pathname === page.value ? "#f5f5f5" : null,
                 }}
+                component={Link}
+                to={page.value}
               >
                 <ListItemIcon sx={{ color: "#14171a" }}>
                   {page.icon}
                 </ListItemIcon>
                 <Typography
                   sx={{
-                    fontWeight: "500",
                     fontFamily: "Open Sans",
                     fontSize: "20px",
-                    fontWeight: location.pathname === page.value ? "600" : null,
+                    fontWeight:
+                      location.pathname === page.value ? "600" : "500",
                   }}
                 >
                   {page.page}

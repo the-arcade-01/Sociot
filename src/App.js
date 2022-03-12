@@ -3,13 +3,15 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import CssBaseline from "@mui/material/CssBaseline";
-import { createTheme, formControlClasses, ThemeProvider } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material";
 
-import Layout from "./components/Layout/Layout";
 import AuthPage from "./pages/AuthPage";
-import HomePage from "./pages/HomePage";
+import MainPage from "./pages/MainPage";
+import ActivityPage from "./pages/ActivityPage";
+
 import SignupForm from "./components/AuthForms/SignupForm";
 import LoginForm from "./components/AuthForms/LoginForm";
+import Layout from "./components/Layout/Layout";
 
 import UserContext from "./store/UserContext";
 import axios from "axios";
@@ -65,8 +67,11 @@ const App = () => {
             </Route>
           </Routes>
           <Routes>
-            <Route path="/home" element={<Layout />}>
-              <Route index element={<HomePage />} />
+            <Route path="/" element={<Layout />}>
+              <Route path="home" element={<MainPage />} />
+              <Route path="posts" element={<MainPage />} />
+              <Route path="saved" element={<MainPage />} />
+              <Route path="activity" element={<ActivityPage />} />
             </Route>
           </Routes>
         </UserContext.Provider>
