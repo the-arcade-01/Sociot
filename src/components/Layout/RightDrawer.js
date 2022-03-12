@@ -5,19 +5,13 @@ import Typography from "@mui/material/Typography";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
+import { categories } from "../utils/categoryArray";
+
 const drawerWidth = 300;
 
 const RightDrawer = () => {
   const [category, setCategory] = useState("all");
-  const categories = [
-    "all",
-    "music",
-    "funny",
-    "videos",
-    "programming",
-    "news",
-    "fashion",
-  ];
+
   return (
     <Drawer
       sx={{
