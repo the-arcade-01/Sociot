@@ -1,13 +1,31 @@
 import React, { useContext } from "react";
 
+import { useNavigate, useLocation } from "react-router-dom";
+
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import Avatar from "@mui/material/Avatar";
 
 import UserContext from "../../store/UserContext";
 
+import axios from "axios";
+
 const PostCard = ({ feed }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const UserCtx = useContext(UserContext);
+  const token = localStorage.getItem("auth-token");
+
+  const handleDelete = async (_id) => {
+    await axios
+      .delete(`${process.env.REACT_APP_API_ENDPOINT}/posts/${_id}`, {
+        headers: { "auth-token": token },
+      })
+      .then((res) => {
+        navigate(location.pathname);
+      });
+  };
   return (
     <Paper
       sx={{
@@ -140,10 +158,11 @@ const PostCard = ({ feed }) => {
                 {feed._creator._id === UserCtx.userData.id ? (
                   <div>
                     <i
-                      className="fi fi-rr-pencil"
+                      className="fi fi-rr-trash"
                       style={{
                         color: "#657786",
                       }}
+                      onClick={() => handleDelete(feed._id)}
                     />
                   </div>
                 ) : (
