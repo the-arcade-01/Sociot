@@ -8,6 +8,7 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import AuthPage from "./pages/AuthPage";
 import MainPage from "./pages/MainPage";
 import ActivityPage from "./pages/ActivityPage";
+import IndividualPostPage from "./pages/IndividualPostPage";
 
 import SignupForm from "./components/AuthForms/SignupForm";
 import LoginForm from "./components/AuthForms/LoginForm";
@@ -92,6 +93,7 @@ const App = () => {
                 }
               />
               <Route path="activity" element={<ActivityPage />} />
+              <Route path="post/:postId" element={<IndividualPostPage />} />
             </Route>
           </Routes>
         </UserContext.Provider>

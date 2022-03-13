@@ -67,7 +67,7 @@ const RightDrawer = ({ category, setCategory }) => {
         sx={{
           fontWeight: "500",
           fontFamily: "Inter",
-          margin: "225px 0px 0px 43px",
+          margin: "225px 0px 0px 53px",
         }}
       >
         {" "}
