@@ -7,11 +7,11 @@ import RightDrawer from "./RightDrawer";
 
 import Box from "@mui/material/Box";
 
-const Layout = () => {
+const Layout = ({ category, setCategory }) => {
   return (
     <Box component="div">
       <LeftDrawer />
-      <RightDrawer />
+      <RightDrawer category={category} setCategory={setCategory} />
       <Header />
       <Outlet />
     </Box>

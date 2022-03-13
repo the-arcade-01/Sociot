@@ -55,6 +55,8 @@ const App = () => {
     checkLogin();
   }, []);
 
+  const [category, setCategory] = useState("All");
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -67,10 +69,28 @@ const App = () => {
             </Route>
           </Routes>
           <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route path="home" element={<MainPage />} />
-              <Route path="posts" element={<MainPage />} />
-              <Route path="saved" element={<MainPage />} />
+            <Route
+              path="/"
+              element={<Layout category={category} setCategory={setCategory} />}
+            >
+              <Route
+                path="home"
+                element={
+                  <MainPage category={category} setCategory={setCategory} />
+                }
+              />
+              <Route
+                path="posts"
+                element={
+                  <MainPage category={category} setCategory={setCategory} />
+                }
+              />
+              <Route
+                path="saved"
+                element={
+                  <MainPage category={category} setCategory={setCategory} />
+                }
+              />
               <Route path="activity" element={<ActivityPage />} />
             </Route>
           </Routes>

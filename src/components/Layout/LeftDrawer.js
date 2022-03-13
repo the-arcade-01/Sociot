@@ -28,7 +28,6 @@ const LeftDrawer = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location);
 
   const [openCreateModal, setOpenCreateModal] = useState(false);
 

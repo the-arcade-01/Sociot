@@ -59,6 +59,7 @@ const CreateModalPage = ({ openCreateModal, setOpenCreateModal }) => {
       )
       .then(() => {
         setText("");
+        setLink("");
         setOpenCreateModal(false);
       })
       .catch((err) => console.log(err));

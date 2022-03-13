@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 
 import FeedDisplay from "../components/Feed/FeedDisplay";
 
-const MainPage = () => {
+const MainPage = ({ category, setCategory }) => {
   const [feeds, setFeeds] = useState([]);
   const location = useLocation();
 
@@ -20,11 +20,14 @@ const MainPage = () => {
         headers: { "auth-token": token },
       })
       .then((res) => {
-        console.log(res.data);
-        setFeeds(res.data.posts);
+        const newResults =
+          category !== "All"
+            ? res.data.posts.filter((post) => post.category === category)
+            : res.data.posts;
+        setFeeds(newResults);
       })
       .catch((err) => console.log(err));
-  }, [location]);
+  }, [location, category]);
   return (
     <div
       style={{

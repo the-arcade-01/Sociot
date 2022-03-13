@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-
 import Drawer from "@mui/material/Drawer";
 import Typography from "@mui/material/Typography";
 import ToggleButton from "@mui/material/ToggleButton";
@@ -9,9 +7,7 @@ import { categories } from "../utils/categoryArray";
 
 const drawerWidth = 315;
 
-const RightDrawer = () => {
-  const [category, setCategory] = useState("all");
-
+const RightDrawer = ({ category, setCategory }) => {
   return (
     <Drawer
       sx={{
