@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 import PostCard from "../components/Feed/PostCard";
+import CreateComment from "../components/Comments/CreateComment";
+import CommentDisplay from "../components/Comments/CommentDisplay";
 
 const IndividualPostPage = () => {
   const postId = useParams().postId;
@@ -21,7 +23,7 @@ const IndividualPostPage = () => {
         setFeed(res.data.post);
         setLoading(false);
       });
-  }, []);
+  }, [postId]);
   return (
     <div
       style={{
@@ -29,7 +31,15 @@ const IndividualPostPage = () => {
         width: "750px",
       }}
     >
-      {!loading ? <PostCard feed={feed} /> : <h1>Loading</h1>}
+      {!loading ? (
+        <div>
+          <PostCard feed={feed} />
+          <CreateComment postId={postId} />
+          <CommentDisplay comments={feed._comments} />
+        </div>
+      ) : (
+        <h1>Loading</h1>
+      )}
     </div>
   );
 };
