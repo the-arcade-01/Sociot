@@ -21,7 +21,8 @@ const CreateComment = ({ postId }) => {
           headers: { "auth-token": token },
         }
       )
-      .then(() => {
+      .then((res) => {
+        console.log(res.data.newComment);
         setComment("");
       });
   };

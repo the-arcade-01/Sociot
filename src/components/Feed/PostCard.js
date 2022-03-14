@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -30,11 +30,7 @@ const PostCard = ({ feed }) => {
       });
   };
   return (
-    <Box
-      component={Link}
-      to={`/post/${feed._id}`}
-      sx={{ textDecoration: "none" }}
-    >
+    <Box onClick={() => navigate(`/post/${feed._id}`)}>
       <Paper
         sx={{
           minHeight: "100px",
@@ -140,7 +136,7 @@ const PostCard = ({ feed }) => {
                 style={{
                   display: "flex",
                   gap: "130px",
-                  marginTop: "10px",
+                  marginTop: "12px",
                 }}
               >
                 <div
@@ -151,19 +147,19 @@ const PostCard = ({ feed }) => {
                 >
                   <i
                     className="fi fi-rr-comment"
-                    style={{ color: "#657786" }}
+                    style={{ color: "#657786", fontSize: "18px" }}
                   />
                   <Typography
                     variant="body2"
                     sx={{ fontFamily: "Inter", color: "#657786" }}
                   >
-                    19
+                    {feed._comments.length}
                   </Typography>
                 </div>
                 <div style={{ display: "flex", gap: "15px" }}>
                   <i
                     className="fi fi-rr-thumbs-up"
-                    style={{ color: "#657789" }}
+                    style={{ color: "#657789", fontSize: "18px" }}
                   />
                   <Typography
                     variant="body2"
@@ -172,7 +168,10 @@ const PostCard = ({ feed }) => {
                     1675
                   </Typography>
                 </div>
-                <i className="fi fi-rr-bookmark" style={{ color: "#657786" }} />
+                <i
+                  className="fi fi-rr-bookmark"
+                  style={{ color: "#657786", fontSize: "18px" }}
+                />
                 <div
                   style={{
                     display: "flex",
@@ -186,6 +185,7 @@ const PostCard = ({ feed }) => {
                         className="fi fi-rr-trash"
                         style={{
                           color: "#657786",
+                          fontSize: "18px",
                         }}
                         onClick={() => handleDelete(feed._id)}
                       />
