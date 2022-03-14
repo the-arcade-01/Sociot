@@ -28,6 +28,7 @@ const Header = () => {
           if (page.value === location.pathname) {
             return page.page;
           }
+          return "";
         })}
       </Typography>
       <Typography

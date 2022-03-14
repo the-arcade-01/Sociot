@@ -26,23 +26,30 @@ const PostCard = ({ feed }) => {
         headers: { "auth-token": token },
       })
       .then((res) => {
-        navigate(location.pathname);
+        navigate(
+          locationArray.includes(location.pathname)
+            ? location.pathname
+            : "/posts"
+        );
       });
   };
   return (
-    <Box onClick={() => navigate(`/post/${feed._id}`)}>
-      <Paper
+    <Paper
+      sx={{
+        minHeight: "100px",
+        padding: "15px 20px",
+        border: "1px solid #f3f3f3",
+
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+      }}
+    >
+      <Box
         sx={{
-          minHeight: "100px",
-          padding: "15px 20px",
-          border: "1px solid #f3f3f3",
-          "&:hover": {
-            background: locationArray.includes(location.pathname)
-              ? "#f5f8fa"
-              : null,
-            cursor: "pointer",
-          },
+          cursor: "pointer",
         }}
+        onClick={() => navigate(`/post/${feed._id}`)}
       >
         <div style={{ display: "flex", gap: "15px" }}>
           <Avatar
@@ -132,74 +139,76 @@ const PostCard = ({ feed }) => {
                 borderRadius: "15px",
               }}
             /> */}
-              <div
-                style={{
-                  display: "flex",
-                  gap: "130px",
-                  marginTop: "12px",
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    gap: "15px",
-                  }}
-                >
-                  <i
-                    className="fi fi-rr-comment"
-                    style={{ color: "#657786", fontSize: "18px" }}
-                  />
-                  <Typography
-                    variant="body2"
-                    sx={{ fontFamily: "Inter", color: "#657786" }}
-                  >
-                    {feed._comments.length}
-                  </Typography>
-                </div>
-                <div style={{ display: "flex", gap: "15px" }}>
-                  <i
-                    className="fi fi-rr-thumbs-up"
-                    style={{ color: "#657789", fontSize: "18px" }}
-                  />
-                  <Typography
-                    variant="body2"
-                    sx={{ fontFamily: "Inter", color: "#657786" }}
-                  >
-                    1675
-                  </Typography>
-                </div>
-                <i
-                  className="fi fi-rr-bookmark"
-                  style={{ color: "#657786", fontSize: "18px" }}
-                />
-                <div
-                  style={{
-                    display: "flex",
-                    gap: "15px",
-                    cursor: "pointer",
-                  }}
-                >
-                  {feed._creator._id === UserCtx.userData.id ? (
-                    <div>
-                      <i
-                        className="fi fi-rr-trash"
-                        style={{
-                          color: "#657786",
-                          fontSize: "18px",
-                        }}
-                        onClick={() => handleDelete(feed._id)}
-                      />
-                    </div>
-                  ) : (
-                    ""
-                  )}
-                </div>
-              </div>
             </div>
           </div>
         </div>
-      </Paper>
-    </Box>
+      </Box>
+      <div
+        style={{
+          display: "flex",
+          gap: "130px",
+          marginTop: "25px",
+          alignSelf: "center",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            gap: "15px",
+          }}
+        >
+          <i
+            className="fi fi-rr-comment"
+            style={{ color: "#657786", fontSize: "18px", cursor: "pointer" }}
+            onClick={() => navigate(`/post/${feed._id}`)}
+          />
+          <Typography
+            variant="body2"
+            sx={{ fontFamily: "Inter", color: "#657786" }}
+          >
+            {feed._comments.length}
+          </Typography>
+        </div>
+        <div style={{ display: "flex", gap: "15px" }}>
+          <i
+            className="fi fi-rr-thumbs-up"
+            style={{ color: "#657789", fontSize: "18px" }}
+          />
+          <Typography
+            variant="body2"
+            sx={{ fontFamily: "Inter", color: "#657786" }}
+          >
+            1675
+          </Typography>
+        </div>
+        <i
+          className="fi fi-rr-bookmark"
+          style={{ color: "#657786", fontSize: "18px" }}
+        />
+        <div
+          style={{
+            display: "flex",
+            gap: "15px",
+            cursor: "pointer",
+          }}
+        >
+          {feed._creator._id === UserCtx.userData.id ? (
+            <div>
+              <i
+                className="fi fi-rr-trash"
+                style={{
+                  color: "#657786",
+                  fontSize: "18px",
+                }}
+                onClick={() => handleDelete(feed._id)}
+              />
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
+      </div>
+    </Paper>
   );
 };
 
