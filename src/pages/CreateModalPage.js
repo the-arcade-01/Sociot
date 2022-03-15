@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -15,6 +15,10 @@ import TextareaAutosize from "@mui/material/TextareaAutosize";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+
+import UserContext from "../store/UserContext";
+import PostContext from "../store/PostContext";
+import UserPostContext from "../store/UserPostContext";
 
 import { categories } from "../components/utils/categoryArray";
 
@@ -41,14 +45,17 @@ const CreateModalPage = ({ openCreateModal, setOpenCreateModal }) => {
 
   const [category, setCategory] = useState("All");
 
+  const UserCtx = useContext(UserContext);
+  const PostCtx = useContext(PostContext);
+  const UserPostCtx = useContext(UserPostContext);
+
   const handleChange = (event) => {
     setCategory(event.target.value);
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     const token = localStorage.getItem("auth-token");
-
     await axios
       .post(
         `${process.env.REACT_APP_API_ENDPOINT}/posts/create`,
@@ -57,13 +64,45 @@ const CreateModalPage = ({ openCreateModal, setOpenCreateModal }) => {
           headers: { "auth-token": token },
         }
       )
-      .then(() => {
+      .then((res) => {
+        const {
+          category,
+          createdAt,
+          likes,
+          link,
+          postImage,
+          text,
+          _comments,
+          _id,
+        } = res.data.newPost;
+
+        const newPost = {
+          category,
+          createdAt,
+          likes,
+          link,
+          postImage,
+          text,
+          _comments,
+          _id,
+          _creator: UserCtx.userData,
+        };
+
+        const newPosts = PostCtx.posts;
+        newPosts.unshift(newPost);
+        PostCtx.setPosts(newPosts);
+
+        const newUserPosts = UserPostCtx.userPosts;
+        newUserPosts.unshift(newPost);
+        UserPostCtx.setUserPosts(newUserPosts);
+
         setText("");
         setLink("");
+        setCategory("All");
         setOpenCreateModal(false);
+        navigate("/home", { replace: true });
       })
       .catch((err) => console.log(err));
-    navigate("/home", { replace: true });
   };
   return (
     <div>

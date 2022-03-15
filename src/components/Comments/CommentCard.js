@@ -8,16 +8,35 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 
 import UserContext from "../../store/UserContext";
+import PostContext from "../../store/PostContext";
+import UserCommentsContext from "../../store/UserCommentsContext";
 
 import axios from "axios";
 
 const CommentCard = ({ comment }) => {
   const UserCtx = useContext(UserContext);
+  const PostCtx = useContext(PostContext);
+  const UserCommentsCtx = useContext(UserCommentsContext);
+
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const token = localStorage.getItem("auth-token");
 
   const handleDelete = async (_id) => {
+    const newComments = UserCommentsCtx.userComments.filter(
+      (comment) => comment._id !== _id
+    );
+    UserCommentsCtx.setUserComments(newComments);
+    const newPosts = PostCtx.posts.map((post) => {
+      if (post._id === comment._post) {
+        const newCommentsArray = post._comments.filter(
+          (comment) => comment._id !== _id
+        );
+        post._comments = newCommentsArray;
+      }
+      return post;
+    });
+    PostCtx.setPosts(newPosts);
     await axios.delete(
       `${process.env.REACT_APP_API_ENDPOINT}/comments/${_id}`,
       {
@@ -93,7 +112,7 @@ const CommentCard = ({ comment }) => {
                   gap: "450px",
                 }}
               >
-                {comment._creator._id === UserCtx.userData.id ? (
+                {comment._creator._id === UserCtx.userData._id ? (
                   <div>
                     <i
                       className="fi fi-rr-trash"

@@ -50,7 +50,7 @@ const PostCard = ({ feed }) => {
     const likeFunction = (posts) => {
       return posts.map((post) => {
         if (post._id === _id) {
-          const userId = UserCtx.userData.id;
+          const userId = UserCtx.userData._id;
           const liked = post.likes.includes(userId);
           if (liked) {
             const newLiked = post.likes.filter((id) => id !== userId);
@@ -63,9 +63,13 @@ const PostCard = ({ feed }) => {
       });
     };
     const newPosts = likeFunction(PostCtx.posts);
-    const newUserPosts = likeFunction(UserPostCtx.userPosts);
 
     PostCtx.setPosts(newPosts);
+
+    const newUserPosts = likeFunction(UserPostCtx.userPosts);
+
+    UserPostCtx.setUserPosts(newUserPosts);
+
     UserPostCtx.setUserPosts(newUserPosts);
 
     await axios.patch(
@@ -202,7 +206,7 @@ const PostCard = ({ feed }) => {
           }}
         >
           <i
-            className="fi fi-rr-comment"
+            className="fi fi-rr-comment-alt"
             style={{ color: "#657786", fontSize: "18px", cursor: "pointer" }}
             onClick={() => navigate(`/post/${feed._id}`)}
           />
@@ -215,8 +219,14 @@ const PostCard = ({ feed }) => {
         </div>
         <div style={{ display: "flex", gap: "15px" }}>
           <i
-            className="fi fi-rr-thumbs-up"
-            style={{ color: "#657789", fontSize: "18px", cursor: "pointer" }}
+            className="fi fi-sr-thumbs-up"
+            style={{
+              color: feed.likes.includes(UserCtx.userData._id)
+                ? "#1da1f2"
+                : "#aab8c2",
+              fontSize: "18px",
+              cursor: "pointer",
+            }}
             onClick={() => handleLike(feed._id)}
           />
           <Typography
@@ -227,8 +237,8 @@ const PostCard = ({ feed }) => {
           </Typography>
         </div>
         <i
-          className="fi fi-rr-bookmark"
-          style={{ color: "#657786", fontSize: "18px" }}
+          className="fi fi-sr-bookmark"
+          style={{ color: "#aab8c2", fontSize: "18px" }}
         />
         <div
           style={{
@@ -237,7 +247,7 @@ const PostCard = ({ feed }) => {
             cursor: "pointer",
           }}
         >
-          {feed._creator._id === UserCtx.userData.id ? (
+          {feed._creator._id === UserCtx.userData._id ? (
             <div>
               <i
                 className="fi fi-rr-trash"

@@ -7,7 +7,6 @@ import { createTheme, ThemeProvider } from "@mui/material";
 
 import AuthPage from "./pages/AuthPage";
 import MainPage from "./pages/MainPage";
-import ActivityPage from "./pages/ActivityPage";
 import IndividualPostPage from "./pages/IndividualPostPage";
 
 import SignupForm from "./components/AuthForms/SignupForm";
@@ -17,6 +16,7 @@ import Layout from "./components/Layout/Layout";
 import UserContext from "./store/UserContext";
 import PostContext from "./store/PostContext";
 import UserPostContext from "./store/UserPostContext";
+import UserCommentsContext from "./store/UserCommentsContext";
 
 import axios from "axios";
 
@@ -27,6 +27,7 @@ import axios from "axios";
   lightGray: #aab8c2
   extraLightGray: #e1e8ed
   extraLLGray: #f5f8fa
+  like: #FF5A5F
 */
 
 const theme = createTheme({
@@ -40,6 +41,7 @@ const App = () => {
   const [userData, setUserData] = useState({});
   const [posts, setPosts] = useState([]);
   const [userPosts, setUserPosts] = useState([]);
+  const [userComments, setUserComments] = useState([]);
 
   const { REACT_APP_API_ENDPOINT } = process.env;
 
@@ -78,29 +80,39 @@ const App = () => {
           </Routes>
           <PostContext.Provider value={{ posts, setPosts }}>
             <UserPostContext.Provider value={{ userPosts, setUserPosts }}>
-              <Routes>
-                <Route
-                  path="/"
-                  element={
-                    <Layout category={category} setCategory={setCategory} />
-                  }
-                >
+              <UserCommentsContext.Provider
+                value={{ userComments, setUserComments }}
+              >
+                <Routes>
                   <Route
-                    path="home"
-                    element={<MainPage category={category} />}
-                  />
-                  <Route
-                    path="posts"
-                    element={<MainPage category={category} />}
-                  />
-                  <Route
-                    path="saved"
-                    element={<MainPage category={category} />}
-                  />
-                  <Route path="activity" element={<ActivityPage />} />
-                  <Route path="post/:postId" element={<IndividualPostPage />} />
-                </Route>
-              </Routes>
+                    path="/"
+                    element={
+                      <Layout category={category} setCategory={setCategory} />
+                    }
+                  >
+                    <Route
+                      path="home"
+                      element={<MainPage category={category} />}
+                    />
+                    <Route
+                      path="posts"
+                      element={<MainPage category={category} />}
+                    />
+                    <Route
+                      path="saved"
+                      element={<MainPage category={category} />}
+                    />
+                    <Route
+                      path="activity"
+                      element={<MainPage category={category} />}
+                    />
+                    <Route
+                      path="post/:postId"
+                      element={<IndividualPostPage />}
+                    />
+                  </Route>
+                </Routes>
+              </UserCommentsContext.Provider>
             </UserPostContext.Provider>
           </PostContext.Provider>
         </UserContext.Provider>
