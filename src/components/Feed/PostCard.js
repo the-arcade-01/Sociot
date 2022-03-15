@@ -33,6 +33,17 @@ const PostCard = ({ feed }) => {
         );
       });
   };
+
+  const handleLike = async (_id) => {
+    await axios.patch(
+      `${process.env.REACT_APP_API_ENDPOINT}/posts/${_id}`,
+      null,
+      {
+        headers: { "auth-token": token },
+      }
+    );
+  };
+
   return (
     <Paper
       sx={{
@@ -172,13 +183,14 @@ const PostCard = ({ feed }) => {
         <div style={{ display: "flex", gap: "15px" }}>
           <i
             className="fi fi-rr-thumbs-up"
-            style={{ color: "#657789", fontSize: "18px" }}
+            style={{ color: "#657789", fontSize: "18px", cursor: "pointer" }}
+            onClick={() => handleLike(feed._id)}
           />
           <Typography
             variant="body2"
             sx={{ fontFamily: "Inter", color: "#657786" }}
           >
-            1675
+            {feed.likes.length}
           </Typography>
         </div>
         <i
