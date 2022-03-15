@@ -15,6 +15,9 @@ import LoginForm from "./components/AuthForms/LoginForm";
 import Layout from "./components/Layout/Layout";
 
 import UserContext from "./store/UserContext";
+import PostContext from "./store/PostContext";
+import UserPostContext from "./store/UserPostContext";
+
 import axios from "axios";
 
 /*
@@ -35,6 +38,9 @@ const theme = createTheme({
 
 const App = () => {
   const [userData, setUserData] = useState({});
+  const [posts, setPosts] = useState([]);
+  const [userPosts, setUserPosts] = useState([]);
+
   const { REACT_APP_API_ENDPOINT } = process.env;
 
   const checkLogin = async () => {
@@ -52,6 +58,7 @@ const App = () => {
       })
       .catch((err) => console.log(err));
   };
+
   useEffect(() => {
     checkLogin();
   }, []);
@@ -69,33 +76,33 @@ const App = () => {
               <Route path="login" element={<LoginForm />} />
             </Route>
           </Routes>
-          <Routes>
-            <Route
-              path="/"
-              element={<Layout category={category} setCategory={setCategory} />}
-            >
-              <Route
-                path="home"
-                element={
-                  <MainPage category={category} setCategory={setCategory} />
-                }
-              />
-              <Route
-                path="posts"
-                element={
-                  <MainPage category={category} setCategory={setCategory} />
-                }
-              />
-              <Route
-                path="saved"
-                element={
-                  <MainPage category={category} setCategory={setCategory} />
-                }
-              />
-              <Route path="activity" element={<ActivityPage />} />
-              <Route path="post/:postId" element={<IndividualPostPage />} />
-            </Route>
-          </Routes>
+          <PostContext.Provider value={{ posts, setPosts }}>
+            <UserPostContext.Provider value={{ userPosts, setUserPosts }}>
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    <Layout category={category} setCategory={setCategory} />
+                  }
+                >
+                  <Route
+                    path="home"
+                    element={<MainPage category={category} />}
+                  />
+                  <Route
+                    path="posts"
+                    element={<MainPage category={category} />}
+                  />
+                  <Route
+                    path="saved"
+                    element={<MainPage category={category} />}
+                  />
+                  <Route path="activity" element={<ActivityPage />} />
+                  <Route path="post/:postId" element={<IndividualPostPage />} />
+                </Route>
+              </Routes>
+            </UserPostContext.Provider>
+          </PostContext.Provider>
         </UserContext.Provider>
       </BrowserRouter>
     </ThemeProvider>

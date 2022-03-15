@@ -8,6 +8,8 @@ import Paper from "@mui/material/Paper";
 import Avatar from "@mui/material/Avatar";
 
 import UserContext from "../../store/UserContext";
+import PostContext from "../../store/PostContext";
+import UserPostContext from "../../store/UserPostContext";
 
 import axios from "axios";
 
@@ -18,9 +20,19 @@ const PostCard = ({ feed }) => {
   const location = useLocation();
 
   const UserCtx = useContext(UserContext);
+  const PostCtx = useContext(PostContext);
+  const UserPostCtx = useContext(UserPostContext);
+
   const token = localStorage.getItem("auth-token");
 
   const handleDelete = async (_id) => {
+    const newPosts = PostCtx.posts.filter((post) => post._id !== _id);
+    const newUserPosts = UserPostCtx.userPosts.filter(
+      (post) => post._id !== _id
+    );
+    PostCtx.setPosts(newPosts);
+    UserPostCtx.setUserPosts(newUserPosts);
+
     await axios
       .delete(`${process.env.REACT_APP_API_ENDPOINT}/posts/${_id}`, {
         headers: { "auth-token": token },
@@ -35,6 +47,27 @@ const PostCard = ({ feed }) => {
   };
 
   const handleLike = async (_id) => {
+    const likeFunction = (posts) => {
+      return posts.map((post) => {
+        if (post._id === _id) {
+          const userId = UserCtx.userData.id;
+          const liked = post.likes.includes(userId);
+          if (liked) {
+            const newLiked = post.likes.filter((id) => id !== userId);
+            post.likes = newLiked;
+          } else {
+            post.likes.push(userId);
+          }
+        }
+        return post;
+      });
+    };
+    const newPosts = likeFunction(PostCtx.posts);
+    const newUserPosts = likeFunction(UserPostCtx.userPosts);
+
+    PostCtx.setPosts(newPosts);
+    UserPostCtx.setUserPosts(newUserPosts);
+
     await axios.patch(
       `${process.env.REACT_APP_API_ENDPOINT}/posts/${_id}`,
       null,
