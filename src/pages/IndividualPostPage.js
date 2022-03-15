@@ -48,7 +48,7 @@ const IndividualPostPage = () => {
       {!loading ? (
         <div>
           <PostCard feed={feed} />
-          {feed._creator._id === UserCtx.userData.id ? null : (
+          {feed._creator._id === UserCtx.userData._id ? null : (
             <CreateComment postId={postId} />
           )}
           <CommentDisplay comments={feed._comments} />
