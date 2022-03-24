@@ -1,19 +1,13 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import PostCard from "../components/Feed/PostCard";
-import CreateComment from "../components/Comments/CreateComment";
 import CommentDisplay from "../components/Comments/CommentDisplay";
-
-import UserContext from "../store/UserContext";
-import PostContext from "../store/PostContext";
 
 import axios from "axios";
 
 const IndividualPostPage = () => {
   const postId = useParams().postId;
-  const UserCtx = useContext(UserContext);
-  const PostCtx = useContext(PostContext);
 
   const [loading, setLoading] = useState(true);
 
@@ -48,10 +42,8 @@ const IndividualPostPage = () => {
       {!loading ? (
         <div>
           <PostCard feed={feed} />
-          {feed._creator._id === UserCtx.userData._id ? null : (
-            <CreateComment postId={postId} />
-          )}
-          <CommentDisplay comments={feed._comments} />
+
+          <CommentDisplay feed={feed} />
         </div>
       ) : (
         <h1>Loading</h1>

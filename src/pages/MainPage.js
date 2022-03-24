@@ -4,7 +4,7 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 
 import FeedDisplay from "../components/Feed/FeedDisplay";
-import CommentDisplay from "../components/Comments/CommentDisplay";
+import CommentCard from "../components/Comments/CommentCard";
 
 import PostContext from "../store/PostContext";
 import UserPostContext from "../store/UserPostContext";
@@ -82,7 +82,47 @@ const MainPage = ({ category }) => {
         ? UserCommentsCtx.userComments
         : [];
 
-    component = <CommentDisplay comments={newResults} />;
+    const handleDelete = (_id, comment) => {
+      const newComments = UserCommentsCtx.userComments.filter(
+        (comment) => comment._id !== _id
+      );
+      UserCommentsCtx.setUserComments(newComments);
+      const newPosts = PostCtx.posts.map((post) => {
+        if (post._id === comment._post) {
+          const newCommentsArray = post._comments.filter(
+            (comment) => comment._id !== _id
+          );
+          post._comments = newCommentsArray;
+        }
+        return post;
+      });
+      PostCtx.setPosts(newPosts);
+
+      const newCommentsArray = newResults.filter(
+        (comment) => comment._id !== _id
+      );
+      newResults = newCommentsArray;
+
+      const token = localStorage.getItem("auth-token");
+      axios.delete(`${process.env.REACT_APP_API_ENDPOINT}/comments/${_id}`, {
+        headers: { "auth-token": token },
+      });
+    };
+    component = (
+      <>
+        {newResults === undefined
+          ? "Empty"
+          : newResults.map((comment) => {
+              return (
+                <CommentCard
+                  key={comment._id}
+                  comment={comment}
+                  handleDelete={handleDelete}
+                />
+              );
+            })}
+      </>
+    );
   }
   return (
     <div

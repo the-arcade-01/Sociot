@@ -10,17 +10,17 @@ import UserCommentsContext from "../../store/UserCommentsContext";
 
 import axios from "axios";
 
-const CreateComment = ({ postId }) => {
+const CreateComment = ({ postId, comments, setComments }) => {
   const [comment, setComment] = useState("");
 
   const UserCtx = useContext(UserContext);
   const PostCtx = useContext(PostContext);
   const UserCommentsCtx = useContext(UserCommentsContext);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const token = localStorage.getItem("auth-token");
-    await axios
+    axios
       .post(
         `${process.env.REACT_APP_API_ENDPOINT}/comments/create`,
         { text: comment, postId: postId },
@@ -46,7 +46,7 @@ const CreateComment = ({ postId }) => {
           return post;
         });
         PostCtx.setPosts(newPosts);
-
+        setComments([...comments, newComment]);
         setComment("");
       });
   };
