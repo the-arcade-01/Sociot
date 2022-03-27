@@ -36,7 +36,7 @@ export const pages = [
         style={{ fontSize: "25px", marginTop: "5px" }}
       />
     ),
-    page: "Saved Posts",
+    page: "Bookmarks",
     value: "/saved",
   },
 ];
