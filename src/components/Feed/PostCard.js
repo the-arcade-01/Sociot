@@ -115,8 +115,7 @@ const PostCard = ({ feed }) => {
         <div style={{ display: "flex", gap: "15px" }}>
           <Avatar
             alt="avatar"
-            src="assets/taichi.png"
-            sx={{ width: 50, height: 50, background: "#f5f8fa" }}
+            sx={{ width: 50, height: 50, background: "#95D3F9" }}
           />
           <div>
             <div

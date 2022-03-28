@@ -22,6 +22,8 @@ import BookmarkContext from "./store/BookmarkContext";
 import axios from "axios";
 
 /*
+  extraLigntBlue: #95D3F9
+  lightBlue: #65BFF6
   blue: #1da1f2
   black: #14171a
   darkGray: #657786
