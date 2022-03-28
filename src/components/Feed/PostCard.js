@@ -24,6 +24,7 @@ const PostCard = ({ feed }) => {
   const UserPostCtx = useContext(UserPostContext);
 
   const token = localStorage.getItem("auth-token");
+  let bookmarkArray = localStorage.getItem("sociot-bookmark") || [];
 
   const handleDelete = async (_id) => {
     const newPosts = PostCtx.posts.filter((post) => post._id !== _id);
@@ -79,6 +80,18 @@ const PostCard = ({ feed }) => {
         headers: { "auth-token": token },
       }
     );
+  };
+
+  const handleBookmark = (feed) => {
+    if (bookmarkArray.includes(feed)) {
+      bookmarkArray = bookmarkArray.filter((book) => {
+        return book._id !== feed._id;
+      });
+    } else {
+      bookmarkArray.push(feed);
+    }
+    localStorage.removeItem("sociot-bookmark");
+    localStorage.setItem("sociot-bookmark", bookmarkArray);
   };
 
   return (
@@ -236,32 +249,32 @@ const PostCard = ({ feed }) => {
             {feed.likes.length}
           </Typography>
         </div>
-        <i
-          className="fi fi-sr-bookmark"
-          style={{ color: "#aab8c2", fontSize: "18px" }}
-        />
-        <div
-          style={{
-            display: "flex",
-            gap: "15px",
-            cursor: "pointer",
-          }}
-        >
-          {feed._creator._id === UserCtx.userData._id ? (
-            <div>
-              <i
-                className="fi fi-rr-trash"
-                style={{
-                  color: "#657786",
-                  fontSize: "18px",
-                }}
-                onClick={() => handleDelete(feed._id)}
-              />
-            </div>
-          ) : (
-            ""
-          )}
-        </div>
+        {/* {feed._creator._id !== UserCtx.userData._id ? (
+          <i
+            className="fi fi-sr-bookmark"
+            style={{
+              color: bookmarkArray.includes(feed) ? "#1da1f2" : "#aab8c2",
+              fontSize: "18px",
+              cursor: "pointer",
+            }}
+            onClick={() => handleBookmark(feed)}
+          />
+        ) : null} */}
+
+        {feed._creator._id === UserCtx.userData._id ? (
+          <div>
+            <i
+              className="fi fi-rr-trash"
+              style={{
+                color: "#657786",
+                fontSize: "18px",
+              }}
+              onClick={() => handleDelete(feed._id)}
+            />
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </Paper>
   );

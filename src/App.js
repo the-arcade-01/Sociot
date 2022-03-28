@@ -17,6 +17,7 @@ import UserContext from "./store/UserContext";
 import PostContext from "./store/PostContext";
 import UserPostContext from "./store/UserPostContext";
 import UserCommentsContext from "./store/UserCommentsContext";
+import BookmarkContext from "./store/BookmarkContext";
 
 import axios from "axios";
 

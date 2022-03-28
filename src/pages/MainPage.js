@@ -123,6 +123,9 @@ const MainPage = ({ category }) => {
             })}
       </>
     );
+  } else if (pathname === "/saved") {
+    newResults = localStorage.getItem("sociot-bookmark") || [];
+    component = <FeedDisplay feeds={newResults} />;
   }
   return (
     <div

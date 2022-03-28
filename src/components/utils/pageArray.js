@@ -29,14 +29,14 @@ export const pages = [
     page: "Your Activity",
     value: "/activity",
   },
-  {
-    icon: (
-      <i
-        className="fi fi-rr-bookmark"
-        style={{ fontSize: "25px", marginTop: "5px" }}
-      />
-    ),
-    page: "Bookmarks",
-    value: "/saved",
-  },
+  // {
+  //   icon: (
+  //     <i
+  //       className="fi fi-rr-bookmark"
+  //       style={{ fontSize: "25px", marginTop: "5px" }}
+  //     />
+  //   ),
+  //   page: "Bookmarks",
+  //   value: "/saved",
+  // },
 ];

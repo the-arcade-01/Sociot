@@ -64,7 +64,7 @@ const LeftDrawer = () => {
         }}
         onClick={() => navigate("/home")}
       />
-      <Paper sx={{ marginLeft: "50px", marginTop: "10px" }}>
+      <Paper sx={{ marginLeft: "50px", marginTop: "30px" }}>
         <List
           sx={{
             maxWidth: "220px",
