@@ -88,7 +88,7 @@ const LoginForm = () => {
       <Typography variant="body1" sx={{ fontFamily: "Inter" }}>
         Don't have an account?{" "}
         <Link
-          to="/register"
+          to="/auth/register"
           style={{
             textDecoration: "none",
             fontWeight: "600",

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material";
@@ -17,7 +17,7 @@ import UserContext from "./store/UserContext";
 import PostContext from "./store/PostContext";
 import UserPostContext from "./store/UserPostContext";
 import UserCommentsContext from "./store/UserCommentsContext";
-import BookmarkContext from "./store/BookmarkContext";
+// import BookmarkContext from "./store/BookmarkContext";
 
 import axios from "axios";
 
@@ -60,8 +60,7 @@ const App = () => {
       })
       .then((res) => {
         setUserData(res.data.user);
-      })
-      .catch((err) => console.log(err));
+      });
   };
 
   useEffect(() => {
@@ -76,9 +75,9 @@ const App = () => {
       <BrowserRouter>
         <UserContext.Provider value={{ userData, setUserData }}>
           <Routes>
-            <Route path="/" element={<AuthPage />}>
-              <Route path="register" element={<SignupForm />} />
-              <Route path="login" element={<LoginForm />} />
+            <Route path="/auth" exact element={<AuthPage />}>
+              <Route path="register" exact element={<SignupForm />} />
+              <Route path="login" exact element={<LoginForm />} />
             </Route>
           </Routes>
           <PostContext.Provider value={{ posts, setPosts }}>
@@ -89,28 +88,34 @@ const App = () => {
                 <Routes>
                   <Route
                     path="/"
+                    exact
                     element={
                       <Layout category={category} setCategory={setCategory} />
                     }
                   >
                     <Route
                       path="home"
+                      exact
                       element={<MainPage category={category} />}
                     />
                     <Route
                       path="posts"
+                      exact
                       element={<MainPage category={category} />}
                     />
                     <Route
                       path="saved"
+                      exact
                       element={<MainPage category={category} />}
                     />
                     <Route
                       path="activity"
+                      exact
                       element={<MainPage category={category} />}
                     />
                     <Route
                       path="post/:postId"
+                      exact
                       element={<IndividualPostPage />}
                     />
                   </Route>

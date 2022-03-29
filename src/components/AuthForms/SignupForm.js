@@ -96,7 +96,7 @@ const SignupForm = () => {
       <Typography variant="body1" sx={{ fontFamily: "Inter" }}>
         Already have an account?{" "}
         <Link
-          to="/login"
+          to="/auth/login"
           style={{
             textDecoration: "none",
             fontWeight: "600",

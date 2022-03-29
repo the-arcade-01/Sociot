@@ -24,7 +24,7 @@ const LogoutUser = () => {
         UserPostCtx.setUserPosts([]);
 
         localStorage.removeItem("auth-token");
-        navigate("/login");
+        navigate("/auth/login");
       }}
       sx={{ textTransform: "none", color: "#14171a" }}
     >

@@ -23,6 +23,8 @@ const PostCard = ({ feed }) => {
   const PostCtx = useContext(PostContext);
   const UserPostCtx = useContext(UserPostContext);
 
+  const hasLiked = feed.likes.includes(UserCtx.userData._id);
+
   const token = localStorage.getItem("auth-token");
   let bookmarkArray = localStorage.getItem("sociot-bookmark") || [];
 
@@ -233,9 +235,7 @@ const PostCard = ({ feed }) => {
           <i
             className="fi fi-sr-thumbs-up"
             style={{
-              color: feed.likes.includes(UserCtx.userData._id)
-                ? "#1da1f2"
-                : "#aab8c2",
+              color: hasLiked ? "#1da1f2" : "#aab8c2",
               fontSize: "18px",
               cursor: "pointer",
             }}
@@ -267,6 +267,7 @@ const PostCard = ({ feed }) => {
               style={{
                 color: "#657786",
                 fontSize: "18px",
+                cursor: "pointer",
               }}
               onClick={() => handleDelete(feed._id)}
             />
