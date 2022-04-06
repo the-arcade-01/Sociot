@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 
 import PostCard from "../components/Feed/PostCard";
 import CommentDisplay from "../components/Comments/CommentDisplay";
+import Spinner from "../components/utils/Spinner";
 
 import axios from "axios";
 
@@ -46,7 +47,7 @@ const IndividualPostPage = () => {
           <CommentDisplay feed={feed} />
         </div>
       ) : (
-        <h1>Loading</h1>
+        <Spinner />
       )}
     </div>
   );

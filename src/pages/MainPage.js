@@ -1,7 +1,10 @@
-import { useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 
 import { useLocation } from "react-router-dom";
+
+import Spinner from "../components/utils/Spinner";
+import Typography from "@mui/material/Typography";
 
 import FeedDisplay from "../components/Feed/FeedDisplay";
 import CommentCard from "../components/Comments/CommentCard";
@@ -12,6 +15,10 @@ import UserCommentsContext from "../store/UserCommentsContext";
 
 const MainPage = ({ category }) => {
   const { pathname } = useLocation();
+
+  const [loadingPosts, setLoadingPosts] = useState(true);
+  const [loadingUserPosts, setLoadingUserPosts] = useState(true);
+  const [loadingComments, setLoadingComments] = useState(true);
 
   const PostCtx = useContext(PostContext);
   const UserPostCtx = useContext(UserPostContext);
@@ -29,6 +36,10 @@ const MainPage = ({ category }) => {
       })
       .then((res) => {
         PostCtx.setPosts(res.data.posts);
+        setLoadingPosts(false);
+      })
+      .catch((err) => {
+        setLoadingPosts(false);
       });
   };
 
@@ -39,6 +50,10 @@ const MainPage = ({ category }) => {
       })
       .then((res) => {
         UserPostCtx.setUserPosts(res.data.posts);
+        setLoadingUserPosts(false);
+      })
+      .catch((err) => {
+        setLoadingUserPosts(false);
       });
   };
 
@@ -49,6 +64,10 @@ const MainPage = ({ category }) => {
       })
       .then((res) => {
         UserCommentsCtx.setUserComments(res.data.comments);
+        setLoadingComments(false);
+      })
+      .catch((err) => {
+        setLoadingComments(false);
       });
   };
 
@@ -110,17 +129,21 @@ const MainPage = ({ category }) => {
     };
     component = (
       <>
-        {newResults === undefined
-          ? "Empty"
-          : newResults.map((comment) => {
-              return (
-                <CommentCard
-                  key={comment._id}
-                  comment={comment}
-                  handleDelete={handleDelete}
-                />
-              );
-            })}
+        {newResults === undefined ? (
+          <Typography>
+            No activity. Start by writing an awesome comment :)
+          </Typography>
+        ) : (
+          newResults.map((comment) => {
+            return (
+              <CommentCard
+                key={comment._id}
+                comment={comment}
+                handleDelete={handleDelete}
+              />
+            );
+          })
+        )}
       </>
     );
   } else if (pathname === "/saved") {
@@ -134,7 +157,11 @@ const MainPage = ({ category }) => {
         width: "750px",
       }}
     >
-      {component}
+      {loadingPosts || loadingComments || loadingUserPosts ? (
+        <Spinner />
+      ) : (
+        component
+      )}
     </div>
   );
 };

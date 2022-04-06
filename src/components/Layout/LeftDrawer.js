@@ -101,96 +101,124 @@ const LeftDrawer = () => {
           })}
         </List>
       </Paper>
-      <Button
-        sx={{
-          background: "#1da1f2",
-          color: "#fff",
-          width: "210px",
-          height: "60px",
-          borderRadius: "50px",
-          "&:hover": {
-            background: "#0C85D0",
-          },
-          fontSize: "18px",
-          fontWeight: "700",
-          textTransform: "none",
-          fontFamily: "Inter",
-          margin: "35px 0 0 60px",
-        }}
-        startIcon={
-          <i
-            className="fi fi-rr-magic-wand"
-            style={{ padding: "5px 8px 0 0" }}
-          />
-        }
-        onClick={() => setOpenCreateModal(true)}
-      >
-        Create Post
-      </Button>
-      <CreateModalPage
-        setOpenCreateModal={setOpenCreateModal}
-        openCreateModal={openCreateModal}
-      />
-      <Paper
-        sx={{
-          width: "250px",
-          height: "75px",
-          display: "flex",
-          alignItems: "center",
-          padding: "5px 15px",
-          gap: "15px",
-          marginBottom: "30px",
-          cursor: "pointer",
-          borderRadius: "50px",
-          "&:hover": {
-            background: "#e1e8ed",
-          },
-          paddingLeft: "20px",
-          margin: "150px 0 0 35px",
-        }}
-      >
-        <Avatar
-          alt="avatar"
-          sx={{ width: 50, height: 50, background: "#95D3F9" }}
-        />
-
-        <div>
-          <Typography
-            variant="body1"
-            sx={{ fontWeight: "700", flexWrap: "nowrap" }}
-          >
-            {UserCtx.userData.name}
-          </Typography>
-          <Typography
+      {UserCtx.userData.name ? (
+        <>
+          <Button
             sx={{
-              fontWeight: "500",
-              fontSize: "15px",
-              color: "#657786",
-              marginTop: "-3px",
+              background: "#1da1f2",
+              color: "#fff",
+              width: "210px",
+              height: "60px",
+              borderRadius: "50px",
+              "&:hover": {
+                background: "#0C85D0",
+              },
+              fontSize: "18px",
+              fontWeight: "700",
+              textTransform: "none",
+              fontFamily: "Inter",
+              margin: "35px 0 0 60px",
+            }}
+            startIcon={
+              <i
+                className="fi fi-rr-magic-wand"
+                style={{ padding: "5px 8px 0 0" }}
+              />
+            }
+            onClick={() => setOpenCreateModal(true)}
+          >
+            Create Post
+          </Button>
+          <CreateModalPage
+            setOpenCreateModal={setOpenCreateModal}
+            openCreateModal={openCreateModal}
+          />
+          <Paper
+            sx={{
+              width: "250px",
+              height: "75px",
+              display: "flex",
+              alignItems: "center",
+              padding: "5px 15px",
+              gap: "15px",
+              marginBottom: "30px",
+              cursor: "pointer",
+              borderRadius: "50px",
+              "&:hover": {
+                background: "#e1e8ed",
+              },
+              paddingLeft: "20px",
+              margin: "150px 0 0 35px",
             }}
           >
-            @{UserCtx.userData.username}
-          </Typography>
-        </div>
-        <i
-          className="fi fi-rr-menu-dots-vertical"
-          aria-controls={open ? "basic-menu" : undefined}
-          aria-haspopup="true"
-          aria-expanded={open ? "true" : undefined}
-          onClick={handleClick}
-        />
-        <Menu
-          id="basic-menu"
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleClose}
-          sx={{ marginTop: "-20px" }}
+            <Avatar
+              alt="avatar"
+              sx={{ width: 50, height: 50, background: "#95D3F9" }}
+            />
+
+            <div>
+              <Typography
+                variant="body1"
+                sx={{ fontWeight: "700", flexWrap: "nowrap" }}
+              >
+                {UserCtx.userData.name}
+              </Typography>
+              <Typography
+                sx={{
+                  fontWeight: "500",
+                  fontSize: "15px",
+                  color: "#657786",
+                  marginTop: "-3px",
+                }}
+              >
+                @{UserCtx.userData.username}
+              </Typography>
+            </div>
+            <i
+              className="fi fi-rr-menu-dots-vertical"
+              aria-controls={open ? "basic-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+              onClick={handleClick}
+            />
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              sx={{ marginTop: "-20px" }}
+            >
+              <MenuItem onClick={handleClose}>
+                <LogoutUser />
+              </MenuItem>
+            </Menu>
+          </Paper>
+        </>
+      ) : (
+        <Button
+          sx={{
+            background: "#1da1f2",
+            color: "#fff",
+            width: "210px",
+            height: "60px",
+            borderRadius: "50px",
+            "&:hover": {
+              background: "#0C85D0",
+            },
+            fontSize: "18px",
+            fontWeight: "700",
+            textTransform: "none",
+            fontFamily: "Inter",
+            margin: "35px 0 0 60px",
+          }}
+          startIcon={
+            <i className="fi fi-rr-check" style={{ padding: "5px 8px 0 0" }} />
+          }
+          onClick={() => navigate("/auth/login")}
         >
-          <MenuItem onClick={handleClose}>
-            <LogoutUser />
-          </MenuItem>
-        </Menu>
-      </Paper>
+          Login
+        </Button>
+      )}
     </Drawer>
   );
 };

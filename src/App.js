@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material";
@@ -12,6 +12,7 @@ import IndividualPostPage from "./pages/IndividualPostPage";
 import SignupForm from "./components/AuthForms/SignupForm";
 import LoginForm from "./components/AuthForms/LoginForm";
 import Layout from "./components/Layout/Layout";
+import Welcome from "./components/Layout/Welcome";
 
 import UserContext from "./store/UserContext";
 import PostContext from "./store/PostContext";
@@ -93,6 +94,7 @@ const App = () => {
                       <Layout category={category} setCategory={setCategory} />
                     }
                   >
+                    <Route index element={<Welcome />} />
                     <Route
                       path="home"
                       exact

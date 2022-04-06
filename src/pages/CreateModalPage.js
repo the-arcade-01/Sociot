@@ -54,7 +54,7 @@ const CreateModalPage = ({ openCreateModal, setOpenCreateModal }) => {
   };
 
   const handleSubmit = async (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     const token = localStorage.getItem("auth-token");
     await axios
       .post(

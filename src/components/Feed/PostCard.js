@@ -112,7 +112,10 @@ const PostCard = ({ feed }) => {
         sx={{
           cursor: "pointer",
         }}
-        onClick={() => navigate(`/post/${feed._id}`)}
+        onClick={() => {
+          if (UserCtx.userData.name) navigate(`/post/${feed._id}`);
+          else navigate("/auth/login");
+        }}
       >
         <div style={{ display: "flex", gap: "15px" }}>
           <Avatar
@@ -222,7 +225,10 @@ const PostCard = ({ feed }) => {
           <i
             className="fi fi-rr-comment-alt"
             style={{ color: "#657786", fontSize: "18px", cursor: "pointer" }}
-            onClick={() => navigate(`/post/${feed._id}`)}
+            onClick={() => {
+              if (UserCtx.userData.name) navigate(`/post/${feed._id}`);
+              else navigate("/auth/login");
+            }}
           />
           <Typography
             variant="body2"
@@ -239,7 +245,10 @@ const PostCard = ({ feed }) => {
               fontSize: "18px",
               cursor: "pointer",
             }}
-            onClick={() => handleLike(feed._id)}
+            onClick={() => {
+              if (UserCtx.userData.name) handleLike(feed._id);
+              else navigate("/auth/login");
+            }}
           />
           <Typography
             variant="body2"
