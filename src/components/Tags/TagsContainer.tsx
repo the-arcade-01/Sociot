@@ -1,7 +1,7 @@
 import { Tag } from "./Tag";
+import { tags } from "../../services/tags";
 
 export const TagsContainer = () => {
-  const tags = ["tech", "art", "music", "gaming"];
   return (
     <div className="w-80 rounded-lg border border-gray-200 h-80 flex flex-col items-start gap-4">
       <div className="w-full flex flex-col items-center py-2 gap-2">
