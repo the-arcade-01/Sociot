@@ -12,6 +12,7 @@ const PostsContainer = () => {
         {posts.map((post) => (
           <PostBanner
             key={post.id}
+            postId={post.id}
             title={post.title}
             username={post.username}
             createdAt={post.createdAt}
