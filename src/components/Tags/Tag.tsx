@@ -1,6 +1,4 @@
-interface TagProps {
-  name: string;
-}
+import { TagProps } from "../../utils/types";
 
 export const Tag: React.FC<TagProps> = ({ name }) => {
   return (
