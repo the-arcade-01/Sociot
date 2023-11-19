@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import SearchBar from "../Search/SearchBar";
+import useUser from "../../hooks/useUser";
 
 export const Navbar = () => {
+  const userId = useUser((state) => state.userId);
   return (
     <>
       <div className="m-4 px-8 flex justify-between items-center ">
@@ -13,12 +15,16 @@ export const Navbar = () => {
           <button className="py-2 px-4 rounded-lg bg-red-400 text-white font-medium text-lg">
             Create
           </button>
-          <Link
-            to="/auth/register"
-            className="py-2 px-4 rounded-lg bg-blue-400 text-white font-medium text-lg"
-          >
-            Register
-          </Link>
+          {userId ? (
+            <Link to="/profile">profile</Link>
+          ) : (
+            <Link
+              to="/auth/register"
+              className="py-2 px-4 rounded-lg bg-blue-400 text-white font-medium text-lg"
+            >
+              Register
+            </Link>
+          )}
         </div>
       </div>
       <hr />

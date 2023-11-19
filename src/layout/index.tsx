@@ -5,12 +5,15 @@ import { AuthPage } from "../pages/Auth";
 import { PostPage } from "../pages/Post/PostPage";
 import { RegisterForm } from "../components/Auth/RegisterForm";
 import { LoginForm } from "../components/Auth/LoginForm";
+import { ProfilePage } from "../pages/Profile";
+import { Toaster } from "react-hot-toast";
 
 const Layout = () => {
   return (
     <Router>
       <main>
         <Navbar />
+        <Toaster />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/auth" element={<AuthPage />}>
@@ -18,6 +21,7 @@ const Layout = () => {
             <Route path="login" element={<LoginForm />} />
           </Route>
           <Route path="/post/:postId" element={<PostPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </main>
     </Router>
