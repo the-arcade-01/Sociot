@@ -41,7 +41,7 @@ export const Navbar = () => {
             </div>
           ) : (
             <Link
-              to="/auth/register"
+              to="/auth/login"
               className="flex justify-between items-center gap-2 px-4 py-2 rounded-md bg-blue-400 text-white cursor-pointer shadow-md"
             >
               <FaRegUser />

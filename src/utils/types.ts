@@ -39,3 +39,8 @@ export interface Post {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface TabProps {
+  activeTab: number;
+  setActiveTab: React.Dispatch<React.SetStateAction<number>>;
+}

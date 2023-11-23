@@ -6,6 +6,7 @@ import { getPosts } from "../../services/api/post";
 import { Post } from "../../utils/types";
 
 const PostsContainer = () => {
+  const [activeTab, setActiveTab] = useState(1);
   const [posts, setPosts] = useState([]);
 
   const fetchPosts = async () => {
@@ -15,11 +16,11 @@ const PostsContainer = () => {
 
   useEffect(() => {
     fetchPosts();
-  }, []);
+  }, [activeTab]);
 
   return (
     <div className="w-full px-8 py-6 border border-gray-200 rounded-lg flex flex-col gap-2">
-      <PostNavBar />
+      <PostNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
       <hr />
       <div className="py-4 flex flex-col gap-4">
         {posts.map((post: Post) => (
