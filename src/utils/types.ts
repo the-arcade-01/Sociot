@@ -28,3 +28,14 @@ export interface UserDetails {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface Post {
+  userId: string;
+  username: string;
+  postId: string;
+  title: string;
+  content: string;
+  views: number;
+  createdAt: string;
+  updatedAt: string;
+}
