@@ -14,7 +14,7 @@ export const PostBanner: React.FC<Post> = ({
 }) => {
   return (
     <Link to={`/post/${postId}`}>
-      <div className="border border-gray-100 p-4 rounded-lg flex justify-between items-center">
+      <div className="border border-gray-100 p-4 rounded-lg flex justify-between items-center shadow">
         <div className="flex items-center gap-5">
           <div className="w-14 h-14">
             <img src={defaultUser} alt="profile" className="rounded-full" />

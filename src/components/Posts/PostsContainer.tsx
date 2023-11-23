@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { PostBanner } from "./PostBanner";
-import { PostFilters } from "./PostFilters";
+import { PostNavBar } from "./PostNavBar";
 
 import { getPosts } from "../../services/api/post";
 import { Post } from "../../utils/types";
@@ -19,7 +19,7 @@ const PostsContainer = () => {
 
   return (
     <div className="w-full px-8 py-6 border border-gray-200 rounded-lg flex flex-col gap-2">
-      <PostFilters />
+      <PostNavBar />
       <hr />
       <div className="py-4 flex flex-col gap-4">
         {posts.map((post: Post) => (

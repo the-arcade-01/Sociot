@@ -7,7 +7,7 @@ import useUser from "../../hooks/useUser";
 
 export const LoginForm = () => {
   const navigate = useNavigate();
-  const { saveUserId, saveToken } = useUser();
+  const { saveUserId, saveToken, getUserDetails } = useUser();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -30,6 +30,7 @@ export const LoginForm = () => {
     toastResponse(response.meta.statusCode, response.meta.message);
     saveToken(response.data.token);
     saveUserId(response.data.userId);
+    getUserDetails();
     navigate("/");
 
     setEmail("");

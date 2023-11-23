@@ -7,8 +7,16 @@ import { RegisterForm } from "../components/Auth/RegisterForm";
 import { LoginForm } from "../components/Auth/LoginForm";
 import { ProfilePage } from "../pages/Profile";
 import { Toaster } from "react-hot-toast";
+import useUser from "../hooks/useUser";
+import { useEffect } from "react";
 
 const Layout = () => {
+  const getUserDetails = useUser((state) => state.getUserDetails);
+
+  useEffect(() => {
+    getUserDetails();
+  }, []);
+
   return (
     <Router>
       <main>

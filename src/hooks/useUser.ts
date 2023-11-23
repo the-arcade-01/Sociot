@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { UserDetails } from "../utils/types";
+import { getUserById } from "../services/api/user";
 
 interface UserState {
   userId: string;
@@ -9,9 +10,10 @@ interface UserState {
   saveToken: (value: string) => void;
   saveUserDetails: (value: UserDetails) => void;
   removeUserState: () => void;
+  getUserDetails: () => void;
 }
 
-const useUser = create<UserState>((set) => ({
+const useUser = create<UserState>((set, get) => ({
   userId: localStorage.getItem("sociot-user-id") || "",
   token: localStorage.getItem("sociot-auth-token") || "",
   userDetails: {
@@ -46,6 +48,13 @@ const useUser = create<UserState>((set) => ({
         updatedAt: "",
       },
     }));
+  },
+  getUserDetails: async () => {
+    const userId = get().userId;
+    const token = get().token;
+    const saveUserDetails = get().saveUserDetails;
+    const response = await getUserById(userId, token);
+    saveUserDetails(response.data);
   },
 }));
 
