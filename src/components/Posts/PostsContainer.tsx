@@ -6,7 +6,7 @@ import { getPosts } from "../../services/api/post";
 import { Post } from "../../utils/types";
 
 const PostsContainer = () => {
-  const [activeTab, setActiveTab] = useState(1);
+  const [activeTab, setActiveTab] = useState(0);
   const [posts, setPosts] = useState([]);
 
   const fetchPosts = async () => {

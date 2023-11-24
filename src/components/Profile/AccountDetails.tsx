@@ -82,7 +82,7 @@ export const AccountDetails = () => {
               className="w-72 py-2 px-4 outline-none border-2 border-gray-200 rounded-lg text-gray-600 "
               placeholder={userDetails.email}
               type="email"
-              readOnly
+              disabled
             />
           </div>
         </div>

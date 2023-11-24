@@ -22,7 +22,7 @@ export interface UserUpdateUserPasswordBody {
 }
 
 export interface UserDetails {
-  userId: string;
+  userId: number;
   username: string;
   email: string;
   createdAt: string;
@@ -30,7 +30,7 @@ export interface UserDetails {
 }
 
 export interface Post {
-  userId: string;
+  userId: number;
   username: string;
   postId: string;
   title: string;
@@ -38,6 +38,12 @@ export interface Post {
   views: number;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface CreatePostBody {
+  userId: number;
+  title: string;
+  content: string;
 }
 
 export interface TabProps {

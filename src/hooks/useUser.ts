@@ -3,28 +3,29 @@ import { UserDetails } from "../utils/types";
 import { getUserById } from "../services/api/user";
 
 interface UserState {
-  userId: string;
+  userId: number;
   token: string;
   userDetails: UserDetails;
-  saveUserId: (value: string) => void;
+  saveUserId: (value: number) => void;
   saveToken: (value: string) => void;
   saveUserDetails: (value: UserDetails) => void;
   removeUserState: () => void;
   getUserDetails: () => void;
+  isUserLoggedIn: () => boolean;
 }
 
 const useUser = create<UserState>((set, get) => ({
-  userId: localStorage.getItem("sociot-user-id") || "",
+  userId: Number(localStorage.getItem("sociot-user-id")) || -1,
   token: localStorage.getItem("sociot-auth-token") || "",
   userDetails: {
-    userId: "",
+    userId: -1,
     username: "",
     email: "",
     createdAt: "",
     updatedAt: "",
   },
-  saveUserId: (value: string) => {
-    localStorage.setItem("sociot-user-id", value);
+  saveUserId: (value: number) => {
+    localStorage.setItem("sociot-user-id", String(value));
     set(() => ({ userId: value }));
   },
   saveToken: (value: string) => {
@@ -38,10 +39,10 @@ const useUser = create<UserState>((set, get) => ({
     localStorage.removeItem("sociot-user-id");
     localStorage.removeItem("sociot-auth-token");
     set(() => ({
-      userId: "",
+      userId: -1,
       token: "",
       userDetails: {
-        userId: "",
+        userId: -1,
         username: "",
         email: "",
         createdAt: "",
@@ -52,9 +53,14 @@ const useUser = create<UserState>((set, get) => ({
   getUserDetails: async () => {
     const userId = get().userId;
     const token = get().token;
-    const saveUserDetails = get().saveUserDetails;
-    const response = await getUserById(userId, token);
-    saveUserDetails(response.data);
+    if (userId != -1 && token != "") {
+      const saveUserDetails = get().saveUserDetails;
+      const response = await getUserById(userId, token);
+      saveUserDetails(response.data);
+    }
+  },
+  isUserLoggedIn: () => {
+    return get().userId != -1 && get().token != "";
   },
 }));
 

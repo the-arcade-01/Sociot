@@ -1,3 +1,5 @@
+import { CreatePostBody } from "../../utils/types";
+
 let URL = `${import.meta.env.VITE_API_BACKEND_ENDPOINT}/posts`;
 
 const actions = {
@@ -24,6 +26,19 @@ const actions = {
     const data = await response.json();
     return data;
   },
+  post: async function (token: string, body: any) {
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(body),
+    };
+    const response = await fetch(URL, options);
+    const data = await response.json();
+    return data;
+  },
 };
 
 export const getPosts = async () => {
@@ -33,5 +48,10 @@ export const getPosts = async () => {
 
 export const updatePostViews = async (postId: string) => {
   const response = await actions.put(postId);
+  return response;
+};
+
+export const createPost = async (token: string, body: CreatePostBody) => {
+  const response = await actions.post(token, body);
   return response;
 };

@@ -75,14 +75,14 @@ export const getUsers = async () => {
   return response;
 };
 
-export const getUserById = async (userId: string, token: string) => {
+export const getUserById = async (userId: number, token: string) => {
   const endpoint = URL + `/${userId}`;
   const response = await actions.get(endpoint, token);
   return response;
 };
 
 export const updateUserById = async (
-  userId: string,
+  userId: number,
   body: UserUpdateUsernameBody,
   token: string
 ) => {
@@ -92,7 +92,7 @@ export const updateUserById = async (
 };
 
 export const updateUserPasswordById = async (
-  userId: string,
+  userId: number,
   body: UserUpdateUserPasswordBody,
   token: string
 ) => {
@@ -101,7 +101,7 @@ export const updateUserPasswordById = async (
   return response;
 };
 
-export const deleteUser = async (userId: string, token: string) => {
+export const deleteUser = async (userId: number, token: string) => {
   const endpoint = URL + `/${userId}`;
   const response = await actions.delete(endpoint, token);
   return response;

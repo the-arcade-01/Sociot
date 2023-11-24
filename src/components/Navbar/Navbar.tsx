@@ -6,8 +6,7 @@ import useUser from "../../hooks/useUser";
 import { Logout } from "../Auth/Logout";
 
 export const Navbar = () => {
-  const userId = useUser((state) => state.userId);
-  const userDetails = useUser((state) => state.userDetails);
+  const { isUserLoggedIn, userDetails } = useUser();
   return (
     <>
       <div className="m-4 px-8 flex justify-between items-center ">
@@ -16,7 +15,7 @@ export const Navbar = () => {
         </Link>
         <SearchBar />
         <div className="flex items-center gap-4">
-          {userId ? (
+          {isUserLoggedIn() ? (
             <div className="dropdown dropdown-bottom dropdown-end">
               <label
                 tabIndex={0}
