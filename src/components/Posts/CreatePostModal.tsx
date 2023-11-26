@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { MdCreate } from "react-icons/md";
+
 import useUser from "../../hooks/useUser";
 import { createPost } from "../../services/api/post";
 import { toastResponse } from "../../utils/toast";
+import TagsInput from "../Tags/TagsInput";
 
 const CreatePostModal = () => {
   const { userId, token } = useUser();
@@ -51,6 +53,7 @@ const CreatePostModal = () => {
           onChange={handleChangeContent}
           required
         />
+          <TagsInput />
         <button
           className="px-2 py-2 bg-green-600 rounded-md shadow flex items-center gap-2 text-white font-semibold"
           type="submit"

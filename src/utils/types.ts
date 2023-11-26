@@ -1,5 +1,7 @@
 export interface TagProps {
   name: string;
+  removeTag: any;
+  key: number;
 }
 
 export interface UserRegisterBody {
