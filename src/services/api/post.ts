@@ -3,14 +3,15 @@ import { CreatePostBody } from "../../utils/types";
 let URL = `${import.meta.env.VITE_API_BACKEND_ENDPOINT}/posts`;
 
 const actions = {
-  get: async function () {
+  get: async function (order: string) {
+    const endpoint = URL + `?sort=${order}`
     const options = {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
     };
-    const response = await fetch(URL, options);
+    const response = await fetch(endpoint, options);
     const data = await response.json();
     return data;
   },
@@ -41,8 +42,8 @@ const actions = {
   },
 };
 
-export const getPosts = async () => {
-  const response = await actions.get();
+export const getPosts = async (order: string) => {
+  const response = await actions.get(order);
   return response;
 };
 

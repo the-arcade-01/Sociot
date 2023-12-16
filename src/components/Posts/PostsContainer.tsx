@@ -9,13 +9,28 @@ const PostsContainer = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [posts, setPosts] = useState([]);
 
-  const fetchPosts = async () => {
-    const response = await getPosts();
+  const fetchPosts = async (order: string) => {
+    const response = await getPosts(order);
     setPosts(response.data);
   };
 
   useEffect(() => {
-    fetchPosts();
+    let order = "hot"
+    switch (activeTab) {
+      case 0:
+          order = "hot" 
+        break;
+      case 1:
+          order = "new"
+        break;
+      case 3:
+          order = "vote"
+        break;
+      default:
+          order = "hot"
+        break;
+    }
+    fetchPosts(order);
   }, [activeTab]);
 
   return (

@@ -2,10 +2,11 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Navbar } from "../components/Navbar/Navbar";
 import { Home } from "../pages/Home";
 import { AuthPage } from "../pages/Auth";
-import { PostPage } from "../pages/Post/PostPage";
+import { PostPage } from "../pages/Post";
 import { RegisterForm } from "../components/Auth/RegisterForm";
 import { LoginForm } from "../components/Auth/LoginForm";
 import { ProfilePage } from "../pages/Profile";
+import { SearchPage } from "../pages/Search";
 import { Toaster } from "react-hot-toast";
 import useUser from "../hooks/useUser";
 import { useEffect } from "react";
@@ -30,6 +31,7 @@ const Layout = () => {
           </Route>
           <Route path="/post/:postId" element={<PostPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/search/:type/:search" element={<SearchPage />} />
         </Routes>
       </main>
     </Router>
