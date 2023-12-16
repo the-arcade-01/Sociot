@@ -2,9 +2,10 @@ import {useState, useEffect} from "react"
 import { Link } from "react-router-dom"
 import { useParams } from "react-router-dom"
 import { getSearch } from "../../services/api/search"
-import { Post } from "../../utils/types"
+import { Post, UserSearch } from "../../utils/types"
 import { PostBanner } from "../Posts/PostBanner"
 import { IoIosArrowBack } from "react-icons/io";
+import { UserBanner } from "../Profile/UserBanner"
 
 export const SearchDetails = () => {
   const [message, setMessage] = useState("")
@@ -18,7 +19,6 @@ export const SearchDetails = () => {
     setMessage(response.meta.message)
     setPosts(response.data.Posts || [])
     setUsers(response.data.Users || [])
-    console.log(response)
   }
 
   useEffect(() => {
@@ -52,7 +52,17 @@ export const SearchDetails = () => {
         </div>
       }
       { users.length > 0 && 
-          <div/>
+        <div className="px-10 py-4 flex flex-wrap gap-4">
+          {users.map((user: UserSearch) => (
+            <UserBanner
+              key={user.userId}
+              userId={user.userId}
+              username={user.username}
+              postCount={user.postCount}
+              createdAt={user.createdAt}
+            />
+          ))}
+        </div>
       }
     </div>
   )

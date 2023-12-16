@@ -29,6 +29,13 @@ export interface UserDetails {
   updatedAt: string;
 }
 
+export interface UserSearch {
+  userId: number;
+  username: string;
+  postCount: number;
+  createdAt: string;
+}
+
 export interface Post {
   userId: number;
   username: string;
