@@ -33,6 +33,7 @@ export interface UserSearch {
   userId: number;
   username: string;
   postCount: number;
+  viewCount: number;
   createdAt: string;
 }
 
@@ -51,6 +52,10 @@ export interface CreatePostBody {
   userId: number;
   title: string;
   content: string;
+}
+
+export interface DeletePostBody {
+  userId: number;
 }
 
 export interface TabProps {

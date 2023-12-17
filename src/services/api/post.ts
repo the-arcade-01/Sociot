@@ -1,10 +1,9 @@
-import { CreatePostBody } from "../../utils/types";
+import { CreatePostBody, DeletePostBody } from "../../utils/types";
 
 let URL = `${import.meta.env.VITE_API_BACKEND_ENDPOINT}/posts`;
 
 const actions = {
-  get: async function (order: string) {
-    const endpoint = URL + `?sort=${order}`
+  get: async function (endpoint: string) {
     const options = {
       method: "GET",
       headers: {
@@ -15,8 +14,7 @@ const actions = {
     const data = await response.json();
     return data;
   },
-  put: async function (postId: string) {
-    const endpoint = URL + `/views/${postId}`;
+  put: async function (endpoint: string) {
     const options = {
       method: "PUT",
       headers: {
@@ -40,19 +38,50 @@ const actions = {
     const data = await response.json();
     return data;
   },
+  delete: async function (endpoint: string, token: string, body: any) {
+    const options = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(body),
+    };
+    const response = await fetch(endpoint, options);
+    const data = await response.json();
+    return data;
+  },
 };
 
 export const getPosts = async (order: string) => {
-  const response = await actions.get(order);
+  const endpoint = URL + `?sort=${order}`;
+  const response = await actions.get(endpoint);
+  return response;
+};
+
+export const getUserPosts = async (userId: number) => {
+  const endpoint = URL + `/users/${userId}`;
+  const response = await actions.get(endpoint);
   return response;
 };
 
 export const updatePostViews = async (postId: string) => {
-  const response = await actions.put(postId);
+  const endpoint = URL + `/views/${postId}`;
+  const response = await actions.put(endpoint);
   return response;
 };
 
 export const createPost = async (token: string, body: CreatePostBody) => {
   const response = await actions.post(token, body);
+  return response;
+};
+
+export const deletePost = async (
+  token: string,
+  postId: string,
+  body: DeletePostBody
+) => {
+  const endpoint = URL + `/${postId}`;
+  const response = await actions.delete(endpoint, token, body);
   return response;
 };

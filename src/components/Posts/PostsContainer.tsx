@@ -15,19 +15,19 @@ const PostsContainer = () => {
   };
 
   useEffect(() => {
-    let order = "hot"
+    let order = "hot";
     switch (activeTab) {
       case 0:
-          order = "hot" 
+        order = "hot";
         break;
       case 1:
-          order = "new"
+        order = "new";
         break;
       case 3:
-          order = "vote"
+        order = "vote";
         break;
       default:
-          order = "hot"
+        order = "hot";
         break;
     }
     fetchPosts(order);

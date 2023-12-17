@@ -13,6 +13,8 @@ export const formatDate = (inputDate: string) => {
 };
 
 export const formatDateSince = (dateString: string) => {
+  if (dateString === "") return "";
+
   const currentDate = new Date();
   const givenDate = new Date(dateString);
 
@@ -26,10 +28,19 @@ export const formatDateSince = (dateString: string) => {
   const years = Math.floor(days / 365);
 
   if (years >= 1) {
-    return `Since: ${years} ${years === 1 ? 'year' : 'years'}`;
+    return `Since: ${years} ${years === 1 ? "year" : "years"}`;
   } else if (months >= 1) {
-    return `Since: ${months} ${months === 1 ? 'month' : 'months'}`;
+    return `Since: ${months} ${months === 1 ? "month" : "months"}`;
   } else {
-    return `Since: ${days} ${days === 1 ? 'day' : 'days'}`;
+    return `Since: ${days} ${days === 1 ? "day" : "days"}`;
   }
-}
+};
+
+export const formatNumber = (num: number) => {
+  if (num >= 1000) {
+    const formatted = num / 1000;
+    return `${formatted.toFixed(1)}k`;
+  } else {
+    return num.toString();
+  }
+};

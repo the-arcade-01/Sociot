@@ -81,6 +81,12 @@ export const getUserById = async (userId: number, token: string) => {
   return response;
 };
 
+export const getUserStats = async (userId: number) => {
+  const endpoint = URL + `/stats/${userId}`;
+  const response = await actions.get(endpoint, "");
+  return response;
+};
+
 export const updateUserById = async (
   userId: number,
   body: UserUpdateUsernameBody,

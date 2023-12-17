@@ -1,29 +1,29 @@
-import {useState, useEffect} from "react"
-import { Link } from "react-router-dom"
-import { useParams } from "react-router-dom"
-import { getSearch } from "../../services/api/search"
-import { Post, UserSearch } from "../../utils/types"
-import { PostBanner } from "../Posts/PostBanner"
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { getSearch } from "../../services/api/search";
+import { Post, UserSearch } from "../../utils/types";
+import { PostBanner } from "../Posts/PostBanner";
 import { IoIosArrowBack } from "react-icons/io";
-import { UserBanner } from "../Profile/UserBanner"
+import { UserBanner } from "../Profile/UserBanner";
 
 export const SearchDetails = () => {
-  const [message, setMessage] = useState("")
-  const [posts, setPosts] = useState([])
-  const [users, setUsers] = useState([])
-  const search = useParams().search
-  const type = useParams().type
+  const [message, setMessage] = useState("");
+  const [posts, setPosts] = useState([]);
+  const [users, setUsers] = useState([]);
+  const search = useParams().search;
+  const type = useParams().type;
 
   const fetchSearchResults = async () => {
-    const response = await getSearch(search || "", type || "")
-    setMessage(response.meta.message)
-    setPosts(response.data.Posts || [])
-    setUsers(response.data.Users || [])
-  }
+    const response = await getSearch(search || "", type || "");
+    setMessage(response.meta.message);
+    setPosts(response.data.Posts || []);
+    setUsers(response.data.Users || []);
+  };
 
   useEffect(() => {
-    fetchSearchResults() 
-  }, [search, type])
+    fetchSearchResults();
+  }, [search, type]);
 
   return (
     <div className="my-6 mx-4 px-8 flex flex-col justify-between border border-gray-200 rounded-lg ">
@@ -34,7 +34,7 @@ export const SearchDetails = () => {
         </Link>
         <h2 className="font-semimedium text-lg">{message}</h2>
       </div>
-      { posts.length > 0 &&
+      {posts.length > 0 && (
         <div className="px-10 py-4 flex flex-col gap-4">
           {posts.map((post: Post) => (
             <PostBanner
@@ -50,8 +50,8 @@ export const SearchDetails = () => {
             />
           ))}
         </div>
-      }
-      { users.length > 0 && 
+      )}
+      {users.length > 0 && (
         <div className="px-10 py-4 flex flex-wrap gap-4">
           {users.map((user: UserSearch) => (
             <UserBanner
@@ -59,11 +59,12 @@ export const SearchDetails = () => {
               userId={user.userId}
               username={user.username}
               postCount={user.postCount}
+              viewCount={user.viewCount}
               createdAt={user.createdAt}
             />
           ))}
         </div>
-      }
+      )}
     </div>
-  )
-}
+  );
+};

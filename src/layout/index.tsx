@@ -7,6 +7,7 @@ import { RegisterForm } from "../components/Auth/RegisterForm";
 import { LoginForm } from "../components/Auth/LoginForm";
 import { ProfilePage } from "../pages/Profile";
 import { SearchPage } from "../pages/Search";
+import { UserPage } from "../pages/User";
 import { Toaster } from "react-hot-toast";
 import useUser from "../hooks/useUser";
 import { useEffect } from "react";
@@ -32,6 +33,7 @@ const Layout = () => {
           <Route path="/post/:postId" element={<PostPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/search/:type/:search" element={<SearchPage />} />
+          <Route path="/user/:userId" element={<UserPage />} />
         </Routes>
       </main>
     </Router>
