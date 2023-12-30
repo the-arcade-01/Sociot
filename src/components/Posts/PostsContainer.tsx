@@ -23,7 +23,7 @@ const PostsContainer = () => {
       case 1:
         order = "new";
         break;
-      case 3:
+      case 2:
         order = "vote";
         break;
       default:
@@ -47,6 +47,8 @@ const PostsContainer = () => {
             title={post.title}
             content={post.content}
             views={post.views}
+            votes={post.votes}
+            tags={post.tags}
             createdAt={post.createdAt}
             updatedAt={post.updatedAt}
           />

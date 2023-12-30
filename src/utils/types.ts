@@ -44,6 +44,8 @@ export interface Post {
   title: string;
   content: string;
   views: number;
+  votes: number;
+  tags: string[];
   createdAt: string;
   updatedAt: string;
 }

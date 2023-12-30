@@ -59,6 +59,12 @@ export const getPosts = async (order: string) => {
   return response;
 };
 
+export const getPostById = async (postId: string) => {
+  const endpoint = URL + `/${postId}`;
+  const response = await actions.get(endpoint);
+  return response;
+};
+
 export const getUserPosts = async (userId: number) => {
   const endpoint = URL + `/users/${userId}`;
   const response = await actions.get(endpoint);

@@ -15,6 +15,7 @@ export const PostBanner: React.FC<Post> = ({
   username,
   createdAt,
   views,
+  votes,
 }) => {
   const { token } = useUser();
   const handleDeletePost = async () => {
@@ -44,7 +45,7 @@ export const PostBanner: React.FC<Post> = ({
       <div className="flex gap-16 items-center text-lg text-gray-500 mr-20">
         <div className="flex gap-3 items-center">
           <FaCaretUp className="text-2xl text-gray-400" />
-          {/* <p>{votes}</p> */}
+          <p>{votes}</p>
         </div>
         <div className="flex gap-3 items-center">
           <FaEye className="text-xl text-gray-400" />
