@@ -5,7 +5,7 @@ import {
   UserUpdateUsernameBody,
 } from "../../utils/types";
 
-let URL = `${import.meta.env.VITE_API_BACKEND_ENDPOINT}/users`;
+const URL = `${import.meta.env.VITE_API_BACKEND_ENDPOINT}/users`;
 
 const actions = {
   get: async function (endpoint: string, token: string) {

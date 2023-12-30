@@ -1,6 +1,6 @@
 import { CreatePostBody, DeletePostBody } from "../../utils/types";
 
-let URL = `${import.meta.env.VITE_API_BACKEND_ENDPOINT}/posts`;
+const URL = `${import.meta.env.VITE_API_BACKEND_ENDPOINT}/posts`;
 
 const actions = {
   get: async function (endpoint: string) {
@@ -53,8 +53,11 @@ const actions = {
   },
 };
 
-export const getPosts = async (order: string) => {
-  const endpoint = URL + `?sort=${order}`;
+export const getPosts = async (order: string, tagFilter: string) => {
+  let endpoint = URL + `?sort=${order}`;
+  if (tagFilter !== "") {
+    endpoint += `&tag=${tagFilter}`;
+  }
   const response = await actions.get(endpoint);
   return response;
 };
@@ -89,5 +92,11 @@ export const deletePost = async (
 ) => {
   const endpoint = URL + `/${postId}`;
   const response = await actions.delete(endpoint, token, body);
+  return response;
+};
+
+export const getTags = async () => {
+  const endpoint = URL + `/tags`;
+  const response = await actions.get(endpoint);
   return response;
 };

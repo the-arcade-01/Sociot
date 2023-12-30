@@ -136,7 +136,12 @@ export const PostDetails = () => {
             </div>
             <div className="flex gap-2">
               {post.tags.map((tag, index) => (
-                <Tag name={tag} key={index} />
+                <Tag
+                  name={tag}
+                  key={index}
+                  setTagFilter={() => {}}
+                  select={false}
+                />
               ))}
             </div>
           </div>

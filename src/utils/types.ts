@@ -1,7 +1,3 @@
-export interface TagProps {
-  name: string;
-}
-
 export interface UserRegisterBody {
   username: string;
   email: string;

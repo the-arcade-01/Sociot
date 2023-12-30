@@ -1,4 +1,4 @@
-let URL = `${import.meta.env.VITE_API_BACKEND_ENDPOINT}/votes`;
+const URL = `${import.meta.env.VITE_API_BACKEND_ENDPOINT}/votes`;
 
 const actions = {
   get: async function (endpoint: string, token: string) {

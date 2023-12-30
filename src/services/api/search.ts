@@ -1,8 +1,7 @@
-let URL = `${import.meta.env.VITE_API_BACKEND_ENDPOINT}/search`;
+const URL = `${import.meta.env.VITE_API_BACKEND_ENDPOINT}/search`;
 
 const actions = {
-  get: async function (search: string, type: string) {
-    const endpoint = URL + `?option=${type}&search=${search}`
+  get: async function (endpoint: string) {
     const options = {
       method: "GET",
       headers: {
@@ -13,9 +12,10 @@ const actions = {
     const data = await response.json();
     return data;
   },
-}
+};
 
 export const getSearch = async (search: string, type: string) => {
-  const response = await actions.get(search, type)
-  return response
-}
+  const endpoint = URL + `?option=${type}&search=${search}`;
+  const response = await actions.get(endpoint);
+  return response;
+};
