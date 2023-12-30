@@ -50,6 +50,7 @@ export interface CreatePostBody {
   userId: number;
   title: string;
   content: string;
+  tags: string[];
 }
 
 export interface DeletePostBody {

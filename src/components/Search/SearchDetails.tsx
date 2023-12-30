@@ -45,6 +45,8 @@ export const SearchDetails = () => {
               title={post.title}
               content={post.content}
               views={post.views}
+              votes={post.votes}
+              tags={post.tags}
               createdAt={post.createdAt}
               updatedAt={post.updatedAt}
             />

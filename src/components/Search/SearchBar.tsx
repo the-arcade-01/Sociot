@@ -30,7 +30,7 @@ const SearchBar = () => {
     <form onSubmit={handleSubmit} className="flex gap-2 items-center">
       <input
         className="w-[30rem] py-2 px-4 outline-none border-2 border-gray-200 rounded-lg text-gray-600 "
-        placeholder="Type eg, golang, user: test"
+        placeholder="Type eg, golang, to search user type, user: test"
         value={search}
         onChange={handleOnChange}
         required
